@@ -12,8 +12,7 @@
   left: 0;
   width: 100%;
   height: 1px;
-  background-color: var(--color-dark-light);
-  opacity: .7;
+  background-color: var(--color-dark-light, var(--opacity-header));
 }
 
 @media screen and (min-width: 960px) {
