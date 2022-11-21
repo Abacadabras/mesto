@@ -1,0 +1,8 @@
+:root {
+  --color-dark: #000;
+  --color-dark-light: #545454;
+  --color-light: #fff;
+  --opacity-hover-save-button: .8;
+  --opacity-hover-profile-buttons: .6;
+  --opacity-hover-like: .5;
+}
