@@ -7,13 +7,14 @@
 @import url('../blocks/header/header.css');
 @import url('../blocks/header/__logo/header__logo.css');
 
-/*@import url('../blocks/');*/
-/*@import url('../blocks/');*/
-/*@import url('../blocks/');*/
-/*@import url('../blocks/');*/
-/*@import url('../blocks/');*/
-/*@import url('../blocks/');*/
-/*@import url('../blocks/');*/
+@import url('../blocks/profile/profile.css');
+@import url('../blocks/profile/__avatar/profile__avatar.css');
+@import url('../blocks/profile/__title/profile__title.css');
+@import url('../blocks/profile/__name/profile__name.css');
+
+@import url('../blocks/button/button.css');
+@import url('../blocks/button/_value/button_value_edit.css');
+@import url('../blocks/button/_value/button_value_add.css');
 /*@import url('../blocks/');*/
 /*@import url('../blocks/');*/
 /*@import url('../blocks/');*/

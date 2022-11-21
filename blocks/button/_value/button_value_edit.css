@@ -1,0 +1,6 @@
+.button_value_edit {
+  width: 18px;
+  height: 18px;
+  background: url("../../../images/icons/button-edit.svg") center/10px 10px no-repeat;
+  border: 1px solid var(--color-light);;
+}
