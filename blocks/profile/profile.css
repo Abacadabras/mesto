@@ -5,4 +5,14 @@
   align-items: center;
   color: var(--color-light);
   font-family: Inter, Arial, sans-serif;
+  max-width: 880px;
+}
+
+@media screen and (min-width: 600px) {
+  .profile {
+    padding: 40px 20px 50px;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0 auto;
+  }
 }
