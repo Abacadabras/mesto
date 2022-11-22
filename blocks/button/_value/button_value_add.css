@@ -9,5 +9,6 @@
   .button_value_add {
     width: 150px;
     margin-left: auto;
+    background-size: 22px 22px;
   }
 }
