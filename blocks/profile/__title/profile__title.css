@@ -1,5 +1,8 @@
 .profile__title {
   display: flex;
   align-items: center;
-  margin-bottom: 14px;
+  margin: 0 0 8px;
+  font-size: 27px;
+  font-weight: 500;
+  line-height: 33px;
 }
