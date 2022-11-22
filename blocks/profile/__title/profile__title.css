@@ -4,3 +4,10 @@
   font-weight: 500;
   line-height: 33px;
 }
+
+@media screen and (min-width: 720px) {
+  .profile__title {
+    font-size: 42px;
+    line-height: 48px;
+  }
+}

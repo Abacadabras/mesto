@@ -4,3 +4,10 @@
   background: url("../../../images/icons/button-add.svg") center/16px 16px no-repeat;
   border: 1px solid var(--color-light);
 }
+
+@media screen and (min-width: 600px) {
+  .button_value_add {
+    width: 150px;
+    margin-left: auto;
+  }
+}
