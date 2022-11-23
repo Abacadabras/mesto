@@ -1,0 +1,14 @@
+.footer {
+  margin: 0 auto;
+  max-width: 880px;
+  padding: 48px 19px 36px;
+  color: var(--color-dark-light);
+  font-family: Inter, Arial, sans-serif;
+}
+
+@media screen and (min-width: 960px) {
+  .footer {
+    padding: 66px 19px 60px;
+  }
+}
+
