@@ -8,6 +8,10 @@
   right: -28px;
 }
 
+.button_value_edit:hover {
+  opacity: var(--opacity-hover-profile-buttons);
+}
+
 @media screen and (min-width: 720px) {
   .button_value_edit {
     width: 24px;

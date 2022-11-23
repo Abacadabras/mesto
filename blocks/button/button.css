@@ -5,7 +5,3 @@
   transition: opacity .3s ease-in-out;
   padding: 0;
 }
-
-.button:hover {
-  opacity: var(--opacity-hover-profile-buttons);
-}
