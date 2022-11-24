@@ -1,5 +1,5 @@
 .button {
-  background: inherit;
+  all: unset;
   cursor: pointer;
   opacity: 1;
   transition: opacity .3s ease-in-out;

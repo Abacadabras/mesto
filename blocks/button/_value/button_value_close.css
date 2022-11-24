@@ -1,0 +1,23 @@
+.button_value_close {
+  background: url("../../../images/icons/button-close.svg") center/cover no-repeat;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: none;
+  top: -36px;
+  right: 0;
+}
+
+.button_value_close:hover {
+  opacity: var(--opacity-hover-profile-buttons);
+}
+
+@media screen and (min-width: 960px) {
+  .button_value_close {
+    width: 32px;
+    height: 32px;
+    top: -40px;
+    right: -40px;
+  }
+}
+

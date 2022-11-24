@@ -2,8 +2,7 @@
   max-width: 22px;
   width: 100%;
   height: 19px;
-  border: none;
-  background: url(../../../images/icons/button-like.svg) center/cover no-repeat;
+  background: url(../../../images/icons/button-like.svg) center no-repeat;
 }
 
 .button_value_like:hover {
