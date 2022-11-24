@@ -15,8 +15,13 @@
   background-color: var(--color-dark-light, var(--opacity-header));
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 720px) {
   .header {
-    padding: 45px 0 41px;
+    padding: 45px 19px 41px;
+    left: 19px;
+  }
+
+  .header::before {
+    width: calc(100% - 38px);
   }
 }
