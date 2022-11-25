@@ -1,0 +1,21 @@
+.button_value_save {
+  width: 100%;
+  text-align: center;
+  border-radius: 2px;
+  background-color: #000;
+  font-size: 14px;
+  line-height: 17px;
+  color: var(--color-light);
+  padding: 14px 0;
+}
+
+.button_value_save:hover {
+  opacity: var(--opacity-hover-save-button);
+}
+
+@media screen and (min-width: 960px) {
+  .button_value_save {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

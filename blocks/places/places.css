@@ -1,0 +1,13 @@
+.places {
+  padding: 0 19px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 282px);
+  gap: 20px 17px;
+  justify-content: center;
+}
+
+@media screen and (min-width: 600px) {
+  .places {
+    padding: 0 9px;
+  }
+}
