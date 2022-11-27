@@ -1,4 +1,4 @@
-.button_value_close {
+.popup__btn-close {
   background: url("../../../images/icons/button-close.svg") center/cover no-repeat;
   position: absolute;
   width: 20px;
@@ -8,16 +8,15 @@
   right: 0;
 }
 
-.button_value_close:hover {
+.popup__btn-close:hover {
   opacity: var(--opacity-hover-profile-buttons);
 }
 
 @media screen and (min-width: 960px) {
-  .button_value_close {
+  .popup__btn-close {
     width: 32px;
     height: 32px;
     top: -40px;
     right: -40px;
   }
 }
-

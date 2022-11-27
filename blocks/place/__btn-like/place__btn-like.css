@@ -1,10 +1,9 @@
-.button_value_like {
-  max-width: 22px;
-  width: 100%;
+.place__btn-like {
+  width: 22px;
   height: 19px;
   background: url(../../../images/icons/button-like.svg) center no-repeat;
 }
 
-.button_value_like:hover {
+.place__btn-like:hover {
   opacity: var(--opacity-hover-like);
 }
