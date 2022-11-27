@@ -1,16 +1,17 @@
-.button_value_add {
+.profile__btn-add {
   width: 282px;
   height: 50px;
   background: url("../../../images/icons/button-add.svg") center/16px 16px no-repeat;
-  border: 1px solid var(--color-light);
+  border: 2px solid var(--color-light);
+  border-radius: 2px;
 }
 
-.button_value_add:hover {
+.profile__btn-add:hover {
   opacity: var(--opacity-hover-profile-buttons);
 }
 
 @media screen and (min-width: 600px) {
-  .button_value_add {
+  .profile__btn-add {
     width: 150px;
     margin-left: auto;
     background-size: 22px 22px;

@@ -1,20 +1,21 @@
-.button_value_save {
+.popup__btn-save {
   width: 100%;
   text-align: center;
   border-radius: 2px;
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 1);
   font-size: 14px;
   line-height: 17px;
   color: var(--color-light);
   padding: 14px 0;
+  transition: background-color .3s ease-in-out;
 }
 
-.button_value_save:hover {
-  opacity: var(--opacity-hover-save-button);
+.popup__btn-save:hover {
+  background-color: rgba(0, 0, 0, .8);;
 }
 
 @media screen and (min-width: 960px) {
-  .button_value_save {
+  .popup__btn-save {
     font-size: 18px;
     line-height: 22px;
   }

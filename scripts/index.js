@@ -1,5 +1,5 @@
 const popupElem = document.querySelector('.popup');
-const editButton = document.querySelector('.button.button_value_edit');
+const editButton = document.querySelector('.button.profile__btn-edit');
 const editProfileForm = document.querySelector('.form');
 const profile = document.querySelector('.profile__info');
 
@@ -19,8 +19,8 @@ editButton.addEventListener('click', () => {
 });
 
 popupElem.addEventListener('click', (event) => {
-  const isClose = event.target.classList.contains('button_value_close');
-  const isSave = event.target.classList.contains('button_value_save');
+  const isClose = event.target.classList.contains('popup__btn-close');
+  const isSave = event.target.classList.contains('popup__btn-save');
 
   if (isClose) onClose(popupElem);
 
