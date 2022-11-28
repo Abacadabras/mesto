@@ -4,3 +4,8 @@
   justify-content: center;
   margin-bottom: 8px;
 }
+@media screen and (min-width: 600px) {
+  .profile__wrapper {
+    justify-content: left;
+  }
+}
