@@ -4,9 +4,9 @@ const buttonEditProfile = document.querySelector('.button.profile__btn-edit');
 const formEditProfile = document.querySelector('.form');
 const formInputName = formEditProfile.querySelector('input[name=name]');
 const formInputJob = formEditProfile.querySelector('input[name=job]');
-const profile = document.querySelector('.profile__info');
-const profileName = profile.querySelector('.profile__title');
-const profileJob = profile.querySelector('.profile__subtitle');
+const profileElem = document.querySelector('.profile__info');
+const profileName = profileElem.querySelector('.profile__title');
+const profileJob = profileElem.querySelector('.profile__subtitle');
 
 const onOpen = (popup) => popup.classList.add('popup_active');
 const onClose = (popup) => popup.classList.remove('popup_active');
