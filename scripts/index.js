@@ -1,3 +1,5 @@
+import { initialCards as dataCards } from './cards.js';
+
 const popupElem = document.querySelector('.popup');
 const buttonPopupClose = popupElem.querySelector('.button.popup__btn-close');
 const buttonEditProfile = document.querySelector('.button.profile__btn-edit');
@@ -29,3 +31,21 @@ buttonPopupClose.addEventListener('click', () => {
 });
 
 popupElem.addEventListener('submit', onSubmit);
+
+const placeElem = document.querySelector('#place').content.querySelector('.place');
+const placesElem = document.querySelector('.places');
+
+const generatePlaceCard = (dataPlace) => {
+  const newCardPlace = placeElem.cloneNode(true);
+
+  const titleCard = newCardPlace.querySelector('.place__title');
+  titleCard.textContent = dataPlace.name;
+  const imgCard = newCardPlace.querySelector('.place__image');
+  imgCard.src = dataPlace.link;
+
+  return newCardPlace;
+};
+
+const renderCardPlace = (place) => placesElem.append(generatePlaceCard(place));
+
+dataCards.forEach((card) => renderCardPlace(card));
