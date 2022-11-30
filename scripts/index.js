@@ -61,6 +61,12 @@ popupElem.addEventListener('submit', onSubmit);
 const placeElem = document.querySelector('#place').content.querySelector('.place');
 const placesElem = document.querySelector('.places');
 
+const clickCardPlace = (evt) => {
+  if (evt.target.classList.contains('place__btn-like')) {
+    evt.target.classList.toggle('place__btn-like_active');
+  }
+};
+
 const generatePlaceCard = (dataPlace) => {
   const newCardPlace = placeElem.cloneNode(true);
 
@@ -69,6 +75,7 @@ const generatePlaceCard = (dataPlace) => {
   const imgCard = newCardPlace.querySelector('.place__image');
   imgCard.src = dataPlace.link;
 
+  newCardPlace.addEventListener('click', clickCardPlace);
   return newCardPlace;
 };
 
