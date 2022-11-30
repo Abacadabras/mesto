@@ -1,6 +1,7 @@
 import { dataCards } from './cards.js';
 import { dataForms } from "./forms.js";
 
+//Popups profile, add card place and event handling
 const popupElem = document.querySelector('.popup');
 const popupTitle = popupElem.querySelector('.popup__title');
 const popupSaveBtn = popupElem.querySelector('.popup__btn-save');
@@ -58,12 +59,15 @@ popupCloseBtn.addEventListener('click', () => {
 
 popupElem.addEventListener('submit', onSubmit);
 
+//Cards places render and event handling
 const placeElem = document.querySelector('#place').content.querySelector('.place');
 const placesElem = document.querySelector('.places');
 
 const clickCardPlace = (evt) => {
   if (evt.target.classList.contains('place__btn-like')) {
     evt.target.classList.toggle('place__btn-like_active');
+  } else if (evt.target.classList.contains('place__btn-delete')) {
+    evt.target.closest('.place').remove();
   }
 };
 
