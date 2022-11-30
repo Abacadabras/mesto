@@ -6,4 +6,5 @@
   color: var(--color-dark);
   font-family: Inter, Arial, sans-serif;
   position: relative;
+  overflow: hidden;
 }
