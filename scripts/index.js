@@ -54,7 +54,7 @@ buttonAddPlace.addEventListener('click', () => {
 })
 
 popupCloseBtn.addEventListener('click', () => {
-  onClose(popupElem)
+  onClose(popupElem);
 });
 
 popupElem.addEventListener('submit', onSubmit);
@@ -62,12 +62,25 @@ popupElem.addEventListener('submit', onSubmit);
 //Cards places render and event handling
 const placeElem = document.querySelector('#place').content.querySelector('.place');
 const placesElem = document.querySelector('.places');
+const popupImgElem = document.querySelector('.popup.popup_image');
+const popupImg = popupImgElem.querySelector('.figure__img');
+const popupImgTitle = popupImgElem.querySelector('.figure__title');
+const popupImgCloseBtn = popupImgElem.querySelector('.button.popup__btn-close');
+
+popupImgCloseBtn.addEventListener('click', () => {
+  onClose(popupImgElem);
+});
 
 const clickCardPlace = (evt) => {
   if (evt.target.classList.contains('place__btn-like')) {
     evt.target.classList.toggle('place__btn-like_active');
   } else if (evt.target.classList.contains('place__btn-delete')) {
-    evt.target.closest('.place').remove();
+      evt.target.closest('.place').remove();
+  } else if (evt.target.classList.contains('place__image')) {
+      popupImg.src = evt.target.src;
+      popupImg.alt = evt.target.alt;
+      popupImgTitle.textContent = evt.target.alt;
+      onOpen(popupImgElem);
   }
 };
 
@@ -78,6 +91,7 @@ const generatePlaceCard = (dataPlace) => {
   titleCard.textContent = dataPlace.name;
   const imgCard = newCardPlace.querySelector('.place__image');
   imgCard.src = dataPlace.link;
+  imgCard.alt = dataPlace.name;
 
   newCardPlace.addEventListener('click', clickCardPlace);
   return newCardPlace;
