@@ -20,9 +20,14 @@ const onClose = (popup) => popup.classList.remove('popup_active');
 
 const onSubmit = (evt) => {
   evt.preventDefault();
-  //TODO: one form of popup, you need a condition!
-  // profileName.textContent = popupInputName.value;
-  // profileJob.textContent = popupInputDescription.value;
+  if (popupTitle.textContent === dataForms.formProfile.title) {
+    profileName.textContent = popupInputName.value;
+    profileJob.textContent = popupInputDescription.value;
+  } else if (popupTitle.textContent === dataForms.formCard.title) {
+    renderCardPlace({ name: popupInputName.value, link: popupInputDescription.value, });
+  } else {
+    //renamed the title - it's a hacker! :)
+  }
   onClose(popupElem);
 };
 
@@ -67,6 +72,6 @@ const generatePlaceCard = (dataPlace) => {
   return newCardPlace;
 };
 
-const renderCardPlace = (place) => placesElem.append(generatePlaceCard(place));
+const renderCardPlace = (place) => placesElem.prepend(generatePlaceCard(place));
 
 dataCards.forEach((card) => renderCardPlace(card));
