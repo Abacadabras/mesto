@@ -1,4 +1,4 @@
-import { initialCards as dataCards } from './cards.js';
+import { dataCards } from './cards.js';
 import { dataForms } from "./forms.js";
 
 const popupElem = document.querySelector('.popup');
