@@ -27,6 +27,7 @@
 @import url('../blocks/place/__text/place__text.css');
 @import url('../blocks/place/__title/place__title.css');
 @import url('../blocks/place/__btn-like/place__btn-like.css');
+@import url('../blocks/place/__btn-delete/place__btn-delete.css');
 
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__text/footer__text.css');
