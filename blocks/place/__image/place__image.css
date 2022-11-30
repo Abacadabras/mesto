@@ -5,4 +5,10 @@
   border-radius: 10px 10px 0 0;
   object-fit: cover;
   object-position: center;
+  transition: transform .5s linear;
+}
+
+.place__image:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }
