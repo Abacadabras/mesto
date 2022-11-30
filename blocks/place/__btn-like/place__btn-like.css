@@ -7,3 +7,7 @@
 .place__btn-like:hover {
   opacity: var(--opacity-hover-like);
 }
+
+.place__btn-like_active {
+  background: url(../../../images/icons/button-like-active.svg) center no-repeat;;
+}
