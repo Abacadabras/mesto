@@ -16,8 +16,8 @@ const profileElem = document.querySelector('.profile__info');
 const profileName = profileElem.querySelector('.profile__title');
 const profileJob = profileElem.querySelector('.profile__subtitle');
 
-const onOpen = (popup) => popup.classList.add('popup_active');
-const onClose = (popup) => popup.classList.remove('popup_active');
+const openPopup = popup => popup.classList.add('popup_active');
+const closePopup = popup => popup.classList.remove('popup_active');
 
 const onSubmit = (evt) => {
   evt.preventDefault();
@@ -29,7 +29,7 @@ const onSubmit = (evt) => {
   } else {
     //renamed the title - it's a hacker! :)
   }
-  onClose(popupElem);
+  closePopup(popupElem);
 };
 
 const fillPopup = (dataPopup) => {
@@ -43,18 +43,18 @@ buttonEditProfile.addEventListener('click', () => {
   fillPopup(dataForms.formProfile);
   popupInputName.value = profileName.textContent;
   popupInputDescription.value = profileJob.textContent;
-  onOpen(popupElem);
+  openPopup(popupElem);
 });
 
 buttonAddPlace.addEventListener('click', () => {
   fillPopup(dataForms.formCard);
   popupInputName.value = '';
   popupInputDescription.value = '';
-  onOpen(popupElem);
+  openPopup(popupElem);
 })
 
 popupCloseBtn.addEventListener('click', () => {
-  onClose(popupElem);
+  closePopup(popupElem);
 });
 
 popupElem.addEventListener('submit', onSubmit);
@@ -68,7 +68,7 @@ const popupImgTitle = popupImgElem.querySelector('.figure__title');
 const popupImgCloseBtn = popupImgElem.querySelector('.button.popup__btn-close');
 
 popupImgCloseBtn.addEventListener('click', () => {
-  onClose(popupImgElem);
+  closePopup(popupImgElem);
 });
 
 const clickCardPlace = (evt) => {
@@ -80,7 +80,7 @@ const clickCardPlace = (evt) => {
       popupImg.src = evt.target.src;
       popupImg.alt = evt.target.alt;
       popupImgTitle.textContent = evt.target.alt;
-      onOpen(popupImgElem);
+      openPopup(popupImgElem);
   }
 };
 
