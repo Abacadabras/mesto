@@ -57,8 +57,8 @@ const clickImgCard = (evt) => {
 const generatePlaceCard = (dataPlace) => {
   const newCardPlace = placeElem.cloneNode(true);
 
-  const likeCardBtn = newCardPlace.querySelector('.button.place__btn-like');
-  const deleteCardBtn = newCardPlace.querySelector('.button.place__btn-delete');
+  const btnLikeCard = newCardPlace.querySelector('.button.place__btn-like');
+  const btnDeleteCard = newCardPlace.querySelector('.button.place__btn-delete');
   const titleCard = newCardPlace.querySelector('.place__title');
   const imgCard = newCardPlace.querySelector('.place__image');
 
@@ -66,8 +66,8 @@ const generatePlaceCard = (dataPlace) => {
   imgCard.src = dataPlace.link;
 
   imgCard.addEventListener('click', clickImgCard);
-  likeCardBtn.addEventListener('click', clickLikeCardBtn);
-  deleteCardBtn.addEventListener('click', clickDeleteCardBtn);
+  btnLikeCard.addEventListener('click', clickLikeCardBtn);
+  btnDeleteCard.addEventListener('click', clickDeleteCardBtn);
 
   return newCardPlace;
 };
