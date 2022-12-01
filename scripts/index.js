@@ -81,7 +81,7 @@ buttonAddPlace.addEventListener('click', () => {
 popupCardElem.addEventListener('submit', (evt) => {
   evt.preventDefault();
   renderCardPlace({ name: popupCardInputName.value, link: popupCardInputDescription.value, });
-  popupCardInputName.value = popupCardInputDescription.value = '';
+  evt.target.reset();
   closePopup(evt.currentTarget);
 });
 
