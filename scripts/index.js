@@ -71,29 +71,29 @@ popupImgCloseBtn.addEventListener('click', () => {
   closePopup(popupImgElem);
 });
 
-const clickCardPlace = (evt) => {
-  if (evt.target.classList.contains('place__btn-like')) {
-    evt.target.classList.toggle('place__btn-like_active');
-  } else if (evt.target.classList.contains('place__btn-delete')) {
-      evt.target.closest('.place').remove();
-  } else if (evt.target.classList.contains('place__image')) {
-      popupImg.src = evt.target.src;
-      popupImg.alt = evt.target.alt;
-      popupImgTitle.textContent = evt.target.alt;
-      openPopup(popupImgElem);
-  }
+const clickLikeCardBtn = (evt) => evt.currentTarget.classList.toggle('place__btn-like_active');
+const clickDeleteCardBtn = (evt) => evt.currentTarget.closest('.place').remove();
+const clickImgCard = (evt) => {
+  popupImg.src = evt.currentTarget.src;
+  popupImgTitle.textContent = popupImg.alt = evt.currentTarget.alt;
+  openPopup(popupImgElem);
 };
 
 const generatePlaceCard = (dataPlace) => {
   const newCardPlace = placeElem.cloneNode(true);
 
+  const likeCardBtn = newCardPlace.querySelector('.button.place__btn-like');
+  const deleteCardBtn = newCardPlace.querySelector('.button.place__btn-delete');
   const titleCard = newCardPlace.querySelector('.place__title');
-  titleCard.textContent = dataPlace.name;
   const imgCard = newCardPlace.querySelector('.place__image');
-  imgCard.src = dataPlace.link;
-  imgCard.alt = dataPlace.name;
 
-  newCardPlace.addEventListener('click', clickCardPlace);
+  titleCard.textContent = imgCard.alt = dataPlace.name;
+  imgCard.src = dataPlace.link;
+
+  imgCard.addEventListener('click', clickImgCard);
+  likeCardBtn.addEventListener('click', clickLikeCardBtn);
+  deleteCardBtn.addEventListener('click', clickDeleteCardBtn);
+
   return newCardPlace;
 };
 
