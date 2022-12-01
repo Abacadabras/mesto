@@ -99,4 +99,4 @@ const generatePlaceCard = (dataPlace) => {
 
 const renderCardPlace = (place) => placesElem.prepend(generatePlaceCard(place));
 
-dataCards.forEach((card) => renderCardPlace(card));
+dataCards.forEach(renderCardPlace);
