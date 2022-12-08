@@ -1,4 +1,7 @@
 import { dataCards } from './dataCards.js';
+import { dataValidate } from './dataValidate.js';
+import { enableValidation } from './validate.js';
+
 
 //Popups profile and event handling
 const popupCloseBtns = document.querySelectorAll('.button.popup__btn-close');
@@ -86,3 +89,4 @@ popupCardElem.addEventListener('submit', (evt) => {
 });
 
 dataCards.forEach(renderCardPlace);
+enableValidation(dataValidate);
