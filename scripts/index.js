@@ -4,7 +4,7 @@ import { enableValidation } from './validate.js';
 
 
 //Popups profile and event handling
-const popupCloseBtns = document.querySelectorAll('.button.popup__btn-close');
+const popups = document.querySelectorAll('.popup');
 
 const popupProfileElem = document.querySelector('.popup.popup_type_profile');
 const popupProfileInputName = popupProfileElem.querySelector('input[name=profile-name]');
@@ -19,9 +19,14 @@ const buttonEditProfile = document.querySelector('.button.profile__btn-edit');
 const openPopup = (popup) => popup.classList.add('popup_active');
 const closePopup = (popup) => popup.classList.remove('popup_active');
 
-popupCloseBtns.forEach((btn) => {
-  const popupElem = btn.closest('.popup');
-  btn.addEventListener('click', () => closePopup(popupElem));
+const handlePopupClose = (evt) => {
+  const isOverlay = evt.target.classList.contains('popup');
+  const isClose = evt.target.classList.contains('popup__btn-close');
+  if (isOverlay || isClose) closePopup(evt.currentTarget);
+};
+
+popups.forEach((popup) => {
+  popup.addEventListener('click', handlePopupClose);
 });
 
 const clearErrors = (popup) => {
