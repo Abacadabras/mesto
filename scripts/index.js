@@ -16,8 +16,21 @@ const profileJob = profileElem.querySelector('.profile__subtitle');
 
 const buttonEditProfile = document.querySelector('.button.profile__btn-edit');
 
-const openPopup = (popup) => popup.classList.add('popup_active');
-const closePopup = (popup) => popup.classList.remove('popup_active');
+const handlePopupCloseEsc = (evt) => {
+  if (evt.key === 'Escape') {
+    closePopup(document.querySelector(`.popup_active`));
+  }
+};
+
+const openPopup = (popup) => {
+  document.addEventListener('keydown', handlePopupCloseEsc);
+  popup.classList.add('popup_active');
+};
+
+const closePopup = (popup) => {
+  document.removeEventListener('keydown', handlePopupCloseEsc);
+  popup.classList.remove('popup_active');
+};
 
 const handlePopupClose = (evt) => {
   const isOverlay = evt.target.classList.contains('popup');
