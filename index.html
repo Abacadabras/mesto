@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <base target="_blank">
   <link rel="stylesheet" href="pages/index.css">
+  <script src="scripts/index.js" type="module"></script>
   <title>Место</title>
 </head>
 <body class="page">
@@ -33,10 +34,12 @@
   <div class="popup popup_type_profile">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="form" name="profile">
-        <input class="form__input" name="name" type="text" placeholder="ФИО">
-        <input class="form__input" name="description" type="text" placeholder="Специальность">
-        <button class="button popup__btn-save" type="submit">Сохранить</button>
+      <form class="form" name="profile" novalidate>
+        <input class="form__input" name="profile-name" type="text" minlength=2 maxlength=40 placeholder="ФИО" required>
+        <span class="form__input-error form__input-error_profile-name"></span>
+        <input class="form__input" name="profile-description" type="text" minlength=2 maxlength=200 placeholder="Специальность" required>
+        <span class="form__input-error form__input-error_profile-description"></span>
+        <button class="button form__submit" type="submit">Сохранить</button>
       </form>
       <button class="button popup__btn-close" type="button"></button>
     </div>
@@ -44,10 +47,12 @@
   <div class="popup popup_type_card">
     <div class="popup__container">
       <h2 class="popup__title">Новое место</h2>
-      <form class="form" name="profile">
-        <input class="form__input" name="name" type="text" placeholder="Название">
-        <input class="form__input" name="description" type="text" placeholder="Ссылка на картинку">
-        <button class="button popup__btn-save" type="submit">Создать</button>
+      <form class="form" name="profile" novalidate>
+        <input class="form__input" name="place-name" type="text" minlength=2 maxlength=30 placeholder="Название" required>
+        <span class="form__input-error form__input-error_place-name"></span>
+        <input class="form__input" name="place-description" type="url" placeholder="Ссылка на картинку" required>
+        <span class="form__input-error form__input-error_place-description"></span>
+        <button class="button form__submit" type="submit">Создать</button>
       </form>
       <button class="button popup__btn-close" type="button"></button>
     </div>
@@ -55,7 +60,7 @@
   <div class="popup popup_type_image">
     <div class="popup__container-img">
       <figure class="figure">
-        <img class="figure__img">
+        <img class="figure__img" src="" alt="">
         <figcaption class="figure__title"></figcaption>
       </figure>
       <button class="button popup__btn-close" type="button"></button>
@@ -63,7 +68,7 @@
   </div>
   <template id="place">
     <article class="place">
-      <img class="place__image">
+      <img class="place__image" src="" alt="">
       <div class="place__text">
         <h2 class="place__title"></h2>
         <button class="button place__btn-like" type="button"></button>
@@ -71,6 +76,5 @@
       <button class="button place__btn-delete" type="button"></button>
     </article>
   </template>
-  <script src="scripts/index.js" type="module"></script>
 </body>
 </html>

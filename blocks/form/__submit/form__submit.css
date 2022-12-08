@@ -1,4 +1,4 @@
-.popup__btn-save {
+.form__submit {
   width: 100%;
   text-align: center;
   border-radius: 2px;
@@ -6,16 +6,19 @@
   font-size: 14px;
   line-height: 17px;
   color: var(--color-light);
-  padding: 14px 0;
-  transition: background-color .3s ease-in-out;
+  padding: 13px 0;
+  transition: all .3s ease-in-out;
+  margin-top: 10px;
+  border: 1px solid rgba(0, 0, 0, 1);
 }
 
-.popup__btn-save:hover {
+.form__submit:hover {
   background-color: rgba(0, 0, 0, .8);
+  border-color: rgba(0, 0, 0, .8);
 }
 
 @media screen and (min-width: 960px) {
-  .popup__btn-save {
+  .form__submit {
     font-size: 18px;
     line-height: 22px;
   }

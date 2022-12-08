@@ -1,0 +1,6 @@
+.form__submit_inactive {
+  background-color: var(--color-light);
+  border-color:  rgba(0, 0, 0 , .2);
+  color: rgba(0, 0, 0 , .2);
+  pointer-events: none;
+}
