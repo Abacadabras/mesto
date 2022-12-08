@@ -7,8 +7,8 @@ import { enableValidation } from './validate.js';
 const popupCloseBtns = document.querySelectorAll('.button.popup__btn-close');
 
 const popupProfileElem = document.querySelector('.popup.popup_type_profile');
-const popupProfileInputName = popupProfileElem.querySelector('input[name=name]');
-const popupProfileInputDescription = popupProfileElem.querySelector('input[name=description]');
+const popupProfileInputName = popupProfileElem.querySelector('input[name=profile-name]');
+const popupProfileInputDescription = popupProfileElem.querySelector('input[name=profile-description]');
 
 const profileElem = document.querySelector('.profile__info');
 const profileName = profileElem.querySelector('.profile__title');
@@ -24,16 +24,31 @@ popupCloseBtns.forEach((btn) => {
   btn.addEventListener('click', () => closePopup(popupElem));
 });
 
+const clearErrors = (popup) => {
+  const errorElements = popup.querySelectorAll('.form__input-error');
+  errorElements.forEach((elem) => elem.textContent = '');
+  const inputElements = popup.querySelectorAll('.form__input');
+  inputElements.forEach((elem) => elem.classList.remove('form__input_error'));
+};
+
+const resetSubmitForm = (popup) => {
+  const btnSubmit = popup.querySelector('.form__submit');
+  btnSubmit.disabled = true;
+  btnSubmit.classList.add('form__submit_inactive');
+};
+
 popupProfileElem.addEventListener('submit', (evt) => {
   evt.preventDefault();
   profileName.textContent = popupProfileInputName.value;
   profileJob.textContent = popupProfileInputDescription.value;
+  resetSubmitForm(evt.currentTarget);
   closePopup(evt.currentTarget);
 });
 
 buttonEditProfile.addEventListener('click', () => {
   popupProfileInputName.value = profileName.textContent;
   popupProfileInputDescription.value = profileJob.textContent;
+  clearErrors(popupProfileElem);
   openPopup(popupProfileElem);
 });
 
@@ -46,8 +61,8 @@ const buttonAddPlace = document.querySelector('.button.profile__btn-add');
 
 const popupImg = popupImgElem.querySelector('.figure__img');
 const popupImgTitle = popupImgElem.querySelector('.figure__title');
-const popupCardInputName = popupCardElem.querySelector('input[name=name]');
-const popupCardInputDescription = popupCardElem.querySelector('input[name=description]');
+const popupCardInputName = popupCardElem.querySelector('input[name=place-name]');
+const popupCardInputDescription = popupCardElem.querySelector('input[name=place-description]');
 
 const clickLikeCardBtn = (evt) => evt.currentTarget.classList.toggle('place__btn-like_active');
 const clickDeleteCardBtn = (evt) => evt.currentTarget.closest('.place').remove();
@@ -85,6 +100,7 @@ popupCardElem.addEventListener('submit', (evt) => {
   evt.preventDefault();
   renderCardPlace({ name: popupCardInputName.value, link: popupCardInputDescription.value, });
   evt.target.reset();
+  resetSubmitForm(evt.currentTarget);
   closePopup(evt.currentTarget);
 });
 
