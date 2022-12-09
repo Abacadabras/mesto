@@ -1,4 +1,4 @@
-import { dataCards, dataValidate } from './constant.js';
+import { dataCards, dataValidate } from './constants.js';
 import { enableValidation } from './validate.js';
 
 
