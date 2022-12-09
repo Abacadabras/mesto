@@ -1,23 +1,30 @@
-import { dataCards } from './dataCards.js';
-import { dataValidate } from './dataValidate.js';
+import { dataCards, dataValidate } from './constant.js';
 import { enableValidation } from './validate.js';
 
 
-//Popups profile and event handling
+const KEYESC = 'Escape';
+//Popups profile
 const popups = document.querySelectorAll('.popup');
-
 const popupProfileElem = document.querySelector('.popup.popup_type_profile');
 const popupProfileInputName = popupProfileElem.querySelector('input[name=profile-name]');
 const popupProfileInputDescription = popupProfileElem.querySelector('input[name=profile-description]');
-
 const profileElem = document.querySelector('.profile__info');
 const profileName = profileElem.querySelector('.profile__title');
 const profileJob = profileElem.querySelector('.profile__subtitle');
-
 const buttonEditProfile = document.querySelector('.button.profile__btn-edit');
+//Cards places
+const popupCardElem = document.querySelector('.popup.popup_type_card');
+const popupImgElem = document.querySelector('.popup.popup_type_image');
+const placeElem = document.querySelector('#place').content.querySelector('.place');
+const placesElem = document.querySelector('.places');
+const buttonAddPlace = document.querySelector('.button.profile__btn-add');
+const popupImg = popupImgElem.querySelector('.figure__img');
+const popupImgTitle = popupImgElem.querySelector('.figure__title');
+const popupCardInputName = popupCardElem.querySelector('input[name=place-name]');
+const popupCardInputDescription = popupCardElem.querySelector('input[name=place-description]');
 
 const handlePopupCloseEsc = (evt) => {
-  if (evt.key === 'Escape') {
+  if (evt.key === KEYESC) {
     closePopup(document.querySelector(`.popup_active`));
   }
 };
@@ -38,10 +45,6 @@ const handlePopupClose = (evt) => {
   if (isOverlay || isClose) closePopup(evt.currentTarget);
 };
 
-popups.forEach((popup) => {
-  popup.addEventListener('click', handlePopupClose);
-});
-
 const clearErrors = (popup) => {
   const errorElements = popup.querySelectorAll('.form__input-error');
   errorElements.forEach((elem) => elem.textContent = '');
@@ -54,33 +57,6 @@ const resetSubmitForm = (popup) => {
   btnSubmit.disabled = true;
   btnSubmit.classList.add('form__submit_inactive');
 };
-
-popupProfileElem.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  profileName.textContent = popupProfileInputName.value;
-  profileJob.textContent = popupProfileInputDescription.value;
-  resetSubmitForm(evt.currentTarget);
-  closePopup(evt.currentTarget);
-});
-
-buttonEditProfile.addEventListener('click', () => {
-  popupProfileInputName.value = profileName.textContent;
-  popupProfileInputDescription.value = profileJob.textContent;
-  clearErrors(popupProfileElem);
-  openPopup(popupProfileElem);
-});
-
-//Cards places render and event handling
-const popupCardElem = document.querySelector('.popup.popup_type_card');
-const popupImgElem = document.querySelector('.popup.popup_type_image');
-const placeElem = document.querySelector('#place').content.querySelector('.place');
-const placesElem = document.querySelector('.places');
-const buttonAddPlace = document.querySelector('.button.profile__btn-add');
-
-const popupImg = popupImgElem.querySelector('.figure__img');
-const popupImgTitle = popupImgElem.querySelector('.figure__title');
-const popupCardInputName = popupCardElem.querySelector('input[name=place-name]');
-const popupCardInputDescription = popupCardElem.querySelector('input[name=place-description]');
 
 const clickLikeCardBtn = (evt) => evt.currentTarget.classList.toggle('place__btn-like_active');
 const clickDeleteCardBtn = (evt) => evt.currentTarget.closest('.place').remove();
@@ -98,7 +74,8 @@ const generatePlaceCard = (dataPlace) => {
   const titleCard = newCardPlace.querySelector('.place__title');
   const imgCard = newCardPlace.querySelector('.place__image');
 
-  titleCard.textContent = imgCard.alt = dataPlace.name;
+  titleCard.textContent = dataPlace.name;
+  imgCard.alt = dataPlace.name;
   imgCard.src = dataPlace.link;
 
   imgCard.addEventListener('click', clickImgCard);
@@ -110,9 +87,28 @@ const generatePlaceCard = (dataPlace) => {
 
 const renderCardPlace = (place) => placesElem.prepend(generatePlaceCard(place));
 
+buttonEditProfile.addEventListener('click', () => {
+  popupProfileInputName.value = profileName.textContent;
+  popupProfileInputDescription.value = profileJob.textContent;
+  clearErrors(popupProfileElem);
+  openPopup(popupProfileElem);
+});
+
 buttonAddPlace.addEventListener('click', () => {
   openPopup(popupCardElem);
 })
+
+popups.forEach((popup) => {
+  popup.addEventListener('click', handlePopupClose);
+});
+
+popupProfileElem.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  profileName.textContent = popupProfileInputName.value;
+  profileJob.textContent = popupProfileInputDescription.value;
+  resetSubmitForm(evt.currentTarget);
+  closePopup(evt.currentTarget);
+});
 
 popupCardElem.addEventListener('submit', (evt) => {
   evt.preventDefault();
