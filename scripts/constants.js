@@ -25,15 +25,26 @@ const dataCards = [
   }
 ];
 
-const dataValidate = {
+const dataValidateSelectors = {
    formSelector: '.form',
    inputSelector: '.form__input',
    submitButtonSelector: '.form__submit',
    inactiveButtonClass: 'form__submit_inactive',
    inputErrorClass: 'form__input_error',
-}
+};
+
+const dataCardSelectors = {
+  template: '#place',
+  card: '.place',
+  titleCard: '.place__title',
+  imageCard: '.place__image',
+  btnLikeCard: '.button.place__btn-like',
+  btnDeleteCard: '.button.place__btn-delete',
+  btnLikeCardActive: 'place__btn-like_active',
+};
 
 export {
   dataCards,
-  dataValidate,
+  dataValidateSelectors,
+  dataCardSelectors,
 }
