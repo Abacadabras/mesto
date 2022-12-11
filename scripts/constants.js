@@ -25,7 +25,7 @@ const dataCards = [
   }
 ];
 
-const dataValidate = {
+const dataValidateSelectors = {
    formSelector: '.form',
    inputSelector: '.form__input',
    submitButtonSelector: '.form__submit',
@@ -33,7 +33,7 @@ const dataValidate = {
    inputErrorClass: 'form__input_error',
 };
 
-const dataSelectors = {
+const dataCardSelectors = {
   template: '#place',
   card: '.place',
   titleCard: '.place__title',
@@ -45,6 +45,6 @@ const dataSelectors = {
 
 export {
   dataCards,
-  dataValidate,
-  dataSelectors,
+  dataValidateSelectors,
+  dataCardSelectors,
 }
