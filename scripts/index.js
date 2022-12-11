@@ -1,5 +1,6 @@
-import { dataCards, dataValidate } from './constants.js';
+import { dataCards, dataValidateSelectors, dataCardSelectors } from './constants.js';
 import { enableValidation } from './validate.js';
+import Card from './Card.js';
 
 
 const KEYESC = 'Escape';
@@ -15,7 +16,6 @@ const buttonEditProfile = document.querySelector('.button.profile__btn-edit');
 //Cards places
 const popupCardElem = document.querySelector('.popup.popup_type_card');
 const popupImgElem = document.querySelector('.popup.popup_type_image');
-const placeElem = document.querySelector('#place').content.querySelector('.place');
 const placesElem = document.querySelector('.places');
 const buttonAddPlace = document.querySelector('.button.profile__btn-add');
 const popupImg = popupImgElem.querySelector('.figure__img');
@@ -58,34 +58,16 @@ const resetSubmitForm = (popup) => {
   btnSubmit.classList.add('form__submit_inactive');
 };
 
-const clickLikeCardBtn = (evt) => evt.currentTarget.classList.toggle('place__btn-like_active');
-const clickDeleteCardBtn = (evt) => evt.currentTarget.closest('.place').remove();
-const clickImgCard = (evt) => {
+const handleImgCard = (evt) => {
   popupImg.src = evt.currentTarget.src;
   popupImgTitle.textContent = popupImg.alt = evt.currentTarget.alt;
   openPopup(popupImgElem);
 };
 
-const generatePlaceCard = (dataPlace) => {
-  const newCardPlace = placeElem.cloneNode(true);
-
-  const btnLikeCard = newCardPlace.querySelector('.button.place__btn-like');
-  const btnDeleteCard = newCardPlace.querySelector('.button.place__btn-delete');
-  const titleCard = newCardPlace.querySelector('.place__title');
-  const imgCard = newCardPlace.querySelector('.place__image');
-
-  titleCard.textContent = dataPlace.name;
-  imgCard.alt = dataPlace.name;
-  imgCard.src = dataPlace.link;
-
-  imgCard.addEventListener('click', clickImgCard);
-  btnLikeCard.addEventListener('click', clickLikeCardBtn);
-  btnDeleteCard.addEventListener('click', clickDeleteCardBtn);
-
-  return newCardPlace;
-};
-
-const renderCardPlace = (place) => placesElem.prepend(generatePlaceCard(place));
+const renderCardPlace = (place) => {
+  const newCard = new Card(dataCardSelectors, place, handleImgCard);
+  placesElem.prepend(newCard.generateCard());
+}
 
 buttonEditProfile.addEventListener('click', () => {
   popupProfileInputName.value = profileName.textContent;
@@ -119,4 +101,4 @@ popupCardElem.addEventListener('submit', (evt) => {
 });
 
 dataCards.forEach(renderCardPlace);
-enableValidation(dataValidate);
+enableValidation(dataValidateSelectors);
