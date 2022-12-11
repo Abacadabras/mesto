@@ -1,6 +1,6 @@
 import { dataCards, dataValidateSelectors, dataCardSelectors } from './constants.js';
-import { enableValidation } from './validate.js';
 import Card from './Card.js';
+import FormValidator from './FormValidator.js'
 
 
 const KEYESC = 'Escape';
@@ -22,6 +22,7 @@ const popupImg = popupImgElem.querySelector('.figure__img');
 const popupImgTitle = popupImgElem.querySelector('.figure__title');
 const popupCardInputName = popupCardElem.querySelector('input[name=place-name]');
 const popupCardInputDescription = popupCardElem.querySelector('input[name=place-description]');
+const formList = document.querySelectorAll(dataValidateSelectors.formSelector);
 
 const handlePopupCloseEsc = (evt) => {
   if (evt.key === KEYESC) {
@@ -101,4 +102,8 @@ popupCardElem.addEventListener('submit', (evt) => {
 });
 
 dataCards.forEach(renderCardPlace);
-enableValidation(dataValidateSelectors);
+
+formList.forEach((form) => {
+  const newFormValidator = new FormValidator(dataValidateSelectors, form)
+  newFormValidator.enableValidation();
+})
