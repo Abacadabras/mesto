@@ -1,9 +1,9 @@
-import { dataCards, dataValidateSelectors, dataCardSelectors } from './constants.js';
+import { dataCards, validationConfig, cardConfig } from './constants.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js'
 
 
-const KEYESC = 'Escape';
+const KEY_ESC = 'Escape';
 //Popups profile
 const popups = document.querySelectorAll('.popup');
 const popupProfileElem = document.querySelector('.popup.popup_type_profile');
@@ -22,10 +22,9 @@ const popupImg = popupImgElem.querySelector('.figure__img');
 const popupImgTitle = popupImgElem.querySelector('.figure__title');
 const popupCardInputName = popupCardElem.querySelector('input[name=place-name]');
 const popupCardInputDescription = popupCardElem.querySelector('input[name=place-description]');
-const formList = document.querySelectorAll(dataValidateSelectors.formSelector);
 
 const handlePopupCloseEsc = (evt) => {
-  if (evt.key === KEYESC) {
+  if (evt.key === KEY_ESC) {
     closePopup(document.querySelector(`.popup_active`));
   }
 };
@@ -66,7 +65,7 @@ const handleImgCard = (evt) => {
 };
 
 const renderCardPlace = (place) => {
-  const newCard = new Card(dataCardSelectors, place, handleImgCard);
+  const newCard = new Card(cardConfig, place, handleImgCard);
   placesElem.prepend(newCard.generateCard());
 }
 
@@ -103,7 +102,11 @@ popupCardElem.addEventListener('submit', (evt) => {
 
 dataCards.forEach(renderCardPlace);
 
-formList.forEach((form) => {
-  const newFormValidator = new FormValidator(dataValidateSelectors, form)
-  newFormValidator.enableValidation();
-})
+const formProfile = document.forms.profile;
+const formAddCard = document.forms.addCard;
+
+const profileFormValidator = new FormValidator(validationConfig, formProfile);
+const addCardFormValidator = new FormValidator(validationConfig, formAddCard);
+
+profileFormValidator.enableValidation();
+addCardFormValidator.enableValidation();

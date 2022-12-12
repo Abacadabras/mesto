@@ -1,5 +1,5 @@
 export default class Card {
-  #selector
+  #class
   #card
   #newCardElement
   #imgCardElement
@@ -7,22 +7,22 @@ export default class Card {
   #btnDeleteCard
   #handleImgCard
 
-  constructor(dataSelectors, dataCard, openPopup) {
-    this.#selector = dataSelectors;
+  constructor(cardConfig, dataCard, openPopup) {
+    this.#class = cardConfig;
     this.#card = dataCard;
     this.#handleImgCard = openPopup;
   }
 
   #getTemplate() {
     return document
-      .querySelector(this.#selector.template)
+      .querySelector(this.#class.templateId)
       .content
-      .querySelector(this.#selector.card)
+      .querySelector(this.#class.cardClass)
       .cloneNode(true);
   }
 
   #handleLikeCardBtn() {
-    this.#btnLikeCard.classList.toggle(this.#selector.btnLikeCardActive);
+    this.#btnLikeCard.classList.toggle(this.#class.btnLikeCardActive);
   }
   #handleDeleteCardBtn() {
     this.#newCardElement.remove();
@@ -43,11 +43,11 @@ export default class Card {
   generateCard() {
     this.#newCardElement = this.#getTemplate();
 
-    this.#imgCardElement = this.#newCardElement.querySelector(this.#selector.imageCard);
-    this.#btnLikeCard = this.#newCardElement.querySelector(this.#selector.btnLikeCard);
-    this.#btnDeleteCard = this.#newCardElement.querySelector(this.#selector.btnDeleteCard);
+    this.#imgCardElement = this.#newCardElement.querySelector(this.#class.imageCardClass);
+    this.#btnLikeCard = this.#newCardElement.querySelector(this.#class.btnLikeCardClass);
+    this.#btnDeleteCard = this.#newCardElement.querySelector(this.#class.btnDeleteCardClass);
 
-    this.#newCardElement.querySelector(this.#selector.titleCard).textContent = this.#card.name;
+    this.#newCardElement.querySelector(this.#class.titleCardClass).textContent = this.#card.name;
     this.#imgCardElement.alt = this.#card.name;
     this.#imgCardElement.src = this.#card.link;
 
