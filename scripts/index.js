@@ -1,14 +1,12 @@
-import { dataCards, dataValidateSelectors, dataCardSelectors } from './constants.js';
+import { dataCards, validationConfig, cardConfig } from './constants.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js'
 
 
-const KEYESC = 'Escape';
+const KEY_ESC = 'Escape';
 //Popups profile
 const popups = document.querySelectorAll('.popup');
 const popupProfileElem = document.querySelector('.popup.popup_type_profile');
-const popupProfileInputName = popupProfileElem.querySelector('input[name=profile-name]');
-const popupProfileInputDescription = popupProfileElem.querySelector('input[name=profile-description]');
 const profileElem = document.querySelector('.profile__info');
 const profileName = profileElem.querySelector('.profile__title');
 const profileJob = profileElem.querySelector('.profile__subtitle');
@@ -22,10 +20,14 @@ const popupImg = popupImgElem.querySelector('.figure__img');
 const popupImgTitle = popupImgElem.querySelector('.figure__title');
 const popupCardInputName = popupCardElem.querySelector('input[name=place-name]');
 const popupCardInputDescription = popupCardElem.querySelector('input[name=place-description]');
-const formList = document.querySelectorAll(dataValidateSelectors.formSelector);
+
+const formProfile = document.forms.profile;
+const formAddCard = document.forms.addCard;
+const profileFormValidator = new FormValidator(validationConfig, formProfile);
+const addCardFormValidator = new FormValidator(validationConfig, formAddCard);
 
 const handlePopupCloseEsc = (evt) => {
-  if (evt.key === KEYESC) {
+  if (evt.key === KEY_ESC) {
     closePopup(document.querySelector(`.popup_active`));
   }
 };
@@ -46,19 +48,6 @@ const handlePopupClose = (evt) => {
   if (isOverlay || isClose) closePopup(evt.currentTarget);
 };
 
-const clearErrors = (popup) => {
-  const errorElements = popup.querySelectorAll('.form__input-error');
-  errorElements.forEach((elem) => elem.textContent = '');
-  const inputElements = popup.querySelectorAll('.form__input');
-  inputElements.forEach((elem) => elem.classList.remove('form__input_error'));
-};
-
-const resetSubmitForm = (popup) => {
-  const btnSubmit = popup.querySelector('.form__submit');
-  btnSubmit.disabled = true;
-  btnSubmit.classList.add('form__submit_inactive');
-};
-
 const handleImgCard = (evt) => {
   popupImg.src = evt.currentTarget.src;
   popupImgTitle.textContent = popupImg.alt = evt.currentTarget.alt;
@@ -66,14 +55,13 @@ const handleImgCard = (evt) => {
 };
 
 const renderCardPlace = (place) => {
-  const newCard = new Card(dataCardSelectors, place, handleImgCard);
+  const newCard = new Card(cardConfig, place, handleImgCard);
   placesElem.prepend(newCard.generateCard());
 }
 
 buttonEditProfile.addEventListener('click', () => {
-  popupProfileInputName.value = profileName.textContent;
-  popupProfileInputDescription.value = profileJob.textContent;
-  clearErrors(popupProfileElem);
+  profileFormValidator.setValueInputs(profileName.textContent, profileJob.textContent);
+  profileFormValidator.resetErrors();
   openPopup(popupProfileElem);
 });
 
@@ -87,23 +75,20 @@ popups.forEach((popup) => {
 
 popupProfileElem.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  profileName.textContent = popupProfileInputName.value;
-  profileJob.textContent = popupProfileInputDescription.value;
-  resetSubmitForm(evt.currentTarget);
+  [profileName.textContent, profileJob.textContent] = [...profileFormValidator.getValueInputs()];
+  profileFormValidator.resetSubmit();
   closePopup(evt.currentTarget);
 });
 
 popupCardElem.addEventListener('submit', (evt) => {
   evt.preventDefault();
   renderCardPlace({ name: popupCardInputName.value, link: popupCardInputDescription.value, });
-  evt.target.reset();
-  resetSubmitForm(evt.currentTarget);
+  addCardFormValidator.resetInputs();
+  addCardFormValidator.resetSubmit();
   closePopup(evt.currentTarget);
 });
 
 dataCards.forEach(renderCardPlace);
 
-formList.forEach((form) => {
-  const newFormValidator = new FormValidator(dataValidateSelectors, form)
-  newFormValidator.enableValidation();
-})
+profileFormValidator.enableValidation();
+addCardFormValidator.enableValidation();
