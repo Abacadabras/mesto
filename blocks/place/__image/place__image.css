@@ -6,6 +6,8 @@
   object-fit: cover;
   object-position: center;
   transition: transform .5s linear;
+  background-color: var(--color-dark);
+  color: var(--color-light);
 }
 
 .place__image:hover {

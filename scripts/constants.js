@@ -25,26 +25,27 @@ const dataCards = [
   }
 ];
 
-const dataValidateSelectors = {
-   formSelector: '.form',
-   inputSelector: '.form__input',
-   submitButtonSelector: '.form__submit',
-   inactiveButtonClass: 'form__submit_inactive',
-   inputErrorClass: 'form__input_error',
+const validationConfig = {
+   formClass: '.form',
+   inputClass: '.form__input',
+   submitButtonClass: '.form__submit',
+   inactiveButton: 'form__submit_inactive',
+   inputError: 'form__input_error',
+   inputErrorClass: '.form__input-error',
 };
 
-const dataCardSelectors = {
-  template: '#place',
-  card: '.place',
-  titleCard: '.place__title',
-  imageCard: '.place__image',
-  btnLikeCard: '.button.place__btn-like',
-  btnDeleteCard: '.button.place__btn-delete',
+const cardConfig = {
+  templateId: '#place',
+  cardClass: '.place',
+  titleCardClass: '.place__title',
+  imageCardClass: '.place__image',
+  btnLikeCardClass: '.button.place__btn-like',
+  btnDeleteCardClass: '.button.place__btn-delete',
   btnLikeCardActive: 'place__btn-like_active',
 };
 
 export {
   dataCards,
-  dataValidateSelectors,
-  dataCardSelectors,
+  validationConfig,
+  cardConfig,
 }
