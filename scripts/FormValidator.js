@@ -75,4 +75,12 @@ export default class FormValidator {
     this.#errorElements.forEach((elem) => elem.textContent = '');
     this.#inputElements.forEach((elem) => elem.classList.remove(this.#class.inputError));
   }
+
+  getValueInputs() {
+    return this.#inputElements.map((input) => input.value);
+  }
+
+  setValueInputs(...args) {
+    this.#inputElements.forEach((input, ind) => input.value = args[ind]);
+  }
 }
