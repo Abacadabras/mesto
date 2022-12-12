@@ -7,6 +7,8 @@ const KEY_ESC = 'Escape';
 //Popups profile
 const popups = document.querySelectorAll('.popup');
 const popupProfileElem = document.querySelector('.popup.popup_type_profile');
+const popupProfileInputName = popupProfileElem.querySelector('input[name=profile-name]');
+const popupProfileInputDescription = popupProfileElem.querySelector('input[name=profile-description]');
 const profileElem = document.querySelector('.profile__info');
 const profileName = profileElem.querySelector('.profile__title');
 const profileJob = profileElem.querySelector('.profile__subtitle');
@@ -60,7 +62,8 @@ const renderCardPlace = (place) => {
 }
 
 buttonEditProfile.addEventListener('click', () => {
-  profileFormValidator.setValueInputs(profileName.textContent, profileJob.textContent);
+  popupProfileInputName.value = profileName.textContent;
+  popupProfileInputDescription.value = profileJob.textContent;
   profileFormValidator.resetErrors();
   openPopup(popupProfileElem);
 });
@@ -75,7 +78,8 @@ popups.forEach((popup) => {
 
 popupProfileElem.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  [profileName.textContent, profileJob.textContent] = [...profileFormValidator.getValueInputs()];
+  profileName.textContent = popupProfileInputName.value;
+  profileJob.textContent = popupProfileInputDescription.value;
   profileFormValidator.resetSubmit();
   closePopup(evt.currentTarget);
 });
