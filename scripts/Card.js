@@ -21,19 +21,19 @@ export default class Card {
       .cloneNode(true);
   }
 
-  #handleLikeCardBtn(evt) {
-    evt.currentTarget.classList.toggle(this.#selector.btnLikeCardActive);
+  #handleLikeCardBtn() {
+    this.#btnLikeCard.classList.toggle(this.#selector.btnLikeCardActive);
   }
-  #handleDeleteCardBtn(evt) {
-    evt.currentTarget.closest(this.#selector.card).remove();
+  #handleDeleteCardBtn() {
+    this.#newCardElement.remove();
   }
 
   #setEventListeners() {
-    this.#btnLikeCard.addEventListener('click', (evt) => {
-      this.#handleLikeCardBtn(evt);
+    this.#btnLikeCard.addEventListener('click', () => {
+      this.#handleLikeCardBtn();
     });
-    this.#btnDeleteCard.addEventListener('click', (evt) => {
-      this.#handleDeleteCardBtn(evt);
+    this.#btnDeleteCard.addEventListener('click', () => {
+      this.#handleDeleteCardBtn();
     });
     this.#imgCardElement.addEventListener('click', (evt) => {
       this.#handleImgCard(evt);
