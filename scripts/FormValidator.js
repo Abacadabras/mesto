@@ -1,21 +1,25 @@
 export default class FormValidator {
   #class
   #formElement
-  #inputList
   #buttonElement
+  #errorElements
+  #inputElements
 
   constructor(validationConfig, formElement) {
     this.#class = validationConfig;
     this.#formElement = formElement;
+    this.#errorElements = this.#formElement.querySelectorAll(this.#class.inputErrorClass);
+    this.#inputElements = Array.from(this.#formElement.querySelectorAll(this.#class.inputClass));
+    this.#buttonElement = this.#formElement.querySelector(this.#class.submitButtonClass);
   }
 
   #showInputError(inputElement, errorElement, errorMessage) {
-    inputElement.classList.add(this.#class.inputErrorClass);
+    inputElement.classList.add(this.#class.inputError);
     errorElement.textContent = errorMessage;
   };
 
   #hideInputError(inputElement, errorElement) {
-    inputElement.classList.remove(this.#class.inputErrorClass);
+    inputElement.classList.remove(this.#class.inputError);
     errorElement.textContent = '';
   };
 
@@ -29,32 +33,46 @@ export default class FormValidator {
   }
 
   #hasInvalidInput() {
-    return this.#inputList.some((inputElement) => {
+    return this.#inputElements.some((inputElement) => {
       return !inputElement.validity.valid;
     })
   }
 
+  #inactiveButtonState() {
+    this.#buttonElement.classList.add(this.#class.inactiveButton);
+    this.#buttonElement.disabled = true;
+  }
+
   #toggleButtonState() {
     if (this.#hasInvalidInput()) {
-      this.#buttonElement.classList.add(this.#class.inactiveButtonClass);
-      this.#buttonElement.disabled = true;
+      this.#inactiveButtonState();
     } else {
-      this.#buttonElement.classList.remove(this.#class.inactiveButtonClass);
+      this.#buttonElement.classList.remove(this.#class.inactiveButton);
       this.#buttonElement.disabled = false;
     }
   }
 
   enableValidation() {
-    this.#inputList = Array.from(this.#formElement.querySelectorAll(this.#class.inputClass));
-    this.#buttonElement = this.#formElement.querySelector(this.#class.submitButtonClass);
-
     this.#toggleButtonState();
 
-    this.#inputList.forEach((inputElement) => {
+    this.#inputElements.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this.#isValid(inputElement);
         this.#toggleButtonState();
       });
     });
+  }
+
+  resetSubmit() {
+    this.#inactiveButtonState();
+  }
+
+  resetInputs() {
+    this.#formElement.reset();
+  }
+
+  resetErrors() {
+    this.#errorElements.forEach((elem) => elem.textContent = '');
+    this.#inputElements.forEach((elem) => elem.classList.remove(this.#class.inputError));
   }
 }
