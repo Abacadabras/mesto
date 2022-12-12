@@ -23,6 +23,11 @@ const popupImgTitle = popupImgElem.querySelector('.figure__title');
 const popupCardInputName = popupCardElem.querySelector('input[name=place-name]');
 const popupCardInputDescription = popupCardElem.querySelector('input[name=place-description]');
 
+const formProfile = document.forms.profile;
+const formAddCard = document.forms.addCard;
+const profileFormValidator = new FormValidator(validationConfig, formProfile);
+const addCardFormValidator = new FormValidator(validationConfig, formAddCard);
+
 const handlePopupCloseEsc = (evt) => {
   if (evt.key === KEY_ESC) {
     closePopup(document.querySelector(`.popup_active`));
@@ -45,19 +50,6 @@ const handlePopupClose = (evt) => {
   if (isOverlay || isClose) closePopup(evt.currentTarget);
 };
 
-const clearErrors = (popup) => {
-  const errorElements = popup.querySelectorAll('.form__input-error');
-  errorElements.forEach((elem) => elem.textContent = '');
-  const inputElements = popup.querySelectorAll('.form__input');
-  inputElements.forEach((elem) => elem.classList.remove('form__input_error'));
-};
-
-const resetSubmitForm = (popup) => {
-  const btnSubmit = popup.querySelector('.form__submit');
-  btnSubmit.disabled = true;
-  btnSubmit.classList.add('form__submit_inactive');
-};
-
 const handleImgCard = (evt) => {
   popupImg.src = evt.currentTarget.src;
   popupImgTitle.textContent = popupImg.alt = evt.currentTarget.alt;
@@ -72,7 +64,7 @@ const renderCardPlace = (place) => {
 buttonEditProfile.addEventListener('click', () => {
   popupProfileInputName.value = profileName.textContent;
   popupProfileInputDescription.value = profileJob.textContent;
-  clearErrors(popupProfileElem);
+  profileFormValidator.resetErrors();
   openPopup(popupProfileElem);
 });
 
@@ -88,25 +80,19 @@ popupProfileElem.addEventListener('submit', (evt) => {
   evt.preventDefault();
   profileName.textContent = popupProfileInputName.value;
   profileJob.textContent = popupProfileInputDescription.value;
-  resetSubmitForm(evt.currentTarget);
+  profileFormValidator.resetSubmit();
   closePopup(evt.currentTarget);
 });
 
 popupCardElem.addEventListener('submit', (evt) => {
   evt.preventDefault();
   renderCardPlace({ name: popupCardInputName.value, link: popupCardInputDescription.value, });
-  evt.target.reset();
-  resetSubmitForm(evt.currentTarget);
+  addCardFormValidator.resetInputs();
+  addCardFormValidator.resetSubmit();
   closePopup(evt.currentTarget);
 });
 
 dataCards.forEach(renderCardPlace);
-
-const formProfile = document.forms.profile;
-const formAddCard = document.forms.addCard;
-
-const profileFormValidator = new FormValidator(validationConfig, formProfile);
-const addCardFormValidator = new FormValidator(validationConfig, formAddCard);
 
 profileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
