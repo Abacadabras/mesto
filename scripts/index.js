@@ -50,9 +50,9 @@ const handlePopupClose = (evt) => {
   if (isOverlay || isClose) closePopup(evt.currentTarget);
 };
 
-const handleImgCard = (evt) => {
-  popupImg.src = evt.currentTarget.src;
-  popupImgTitle.textContent = popupImg.alt = evt.currentTarget.alt;
+const handleImgCard = (name, link) => {
+  popupImg.src = link;
+  popupImgTitle.textContent = popupImg.alt = name;
   openPopup(popupImgElem);
 };
 
