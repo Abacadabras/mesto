@@ -61,19 +61,19 @@ const renderCardPlace = (place) => {
   placesElem.prepend(newCard.generateCard());
 }
 
-buttonEditProfile.addEventListener('click', () => {
+buttonEditProfile.addEventListener('mousedown', () => {
   popupProfileInputName.value = profileName.textContent;
   popupProfileInputDescription.value = profileJob.textContent;
   profileFormValidator.resetErrors();
   openPopup(popupProfileElem);
 });
 
-buttonAddPlace.addEventListener('click', () => {
+buttonAddPlace.addEventListener('mousedown', () => {
   openPopup(popupCardElem);
 })
 
 popups.forEach((popup) => {
-  popup.addEventListener('click', handlePopupClose);
+  popup.addEventListener('mousedown', handlePopupClose);
 });
 
 popupProfileElem.addEventListener('submit', (evt) => {
