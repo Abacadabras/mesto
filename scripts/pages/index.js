@@ -1,6 +1,7 @@
 import { dataCards, validationConfig, cardConfig } from '../utils/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js'
+import Section from '../components/Section.js';
 
 
 const KEY_ESC = 'Escape';
@@ -16,7 +17,7 @@ const buttonEditProfile = document.querySelector('.button.profile__btn-edit');
 //Cards places
 const popupCardElem = document.querySelector('.popup.popup_type_card');
 const popupImgElem = document.querySelector('.popup.popup_type_image');
-const placesElem = document.querySelector('.places');
+const placesSelector = '.places';
 const buttonAddPlace = document.querySelector('.button.profile__btn-add');
 const popupImg = popupImgElem.querySelector('.figure__img');
 const popupImgTitle = popupImgElem.querySelector('.figure__title');
@@ -27,6 +28,14 @@ const formProfile = document.forms.profile;
 const formAddCard = document.forms.addCard;
 const profileFormValidator = new FormValidator(validationConfig, formProfile);
 const addCardFormValidator = new FormValidator(validationConfig, formAddCard);
+const placesList = new Section({
+  items: dataCards,
+  renderer: (place) => {
+    const card = new Card(cardConfig, place, handleImgCard);
+    const cardElement = card.generateCard();
+    placesList.addItem(cardElement);
+  }
+}, placesSelector);
 
 const handlePopupCloseEsc = (evt) => {
   if (evt.key === KEY_ESC) {
@@ -56,11 +65,6 @@ const handleImgCard = (name, link) => {
   openPopup(popupImgElem);
 };
 
-const renderCardPlace = (place) => {
-  const newCard = new Card(cardConfig, place, handleImgCard);
-  placesElem.prepend(newCard.generateCard());
-}
-
 buttonEditProfile.addEventListener('mousedown', () => {
   popupProfileInputName.value = profileName.textContent;
   popupProfileInputDescription.value = profileJob.textContent;
@@ -86,13 +90,15 @@ popupProfileElem.addEventListener('submit', (evt) => {
 
 popupCardElem.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  renderCardPlace({ name: popupCardInputName.value, link: popupCardInputDescription.value, });
+  const place = { name: popupCardInputName.value, link: popupCardInputDescription.value };
+  const card = new Card(cardConfig, place, handleImgCard);
+  const cardElement = card.generateCard();
+  placesList.addItem(cardElement);
   addCardFormValidator.resetInputs();
   addCardFormValidator.resetSubmit();
   closePopup(evt.currentTarget);
 });
 
-dataCards.forEach(renderCardPlace);
-
+placesList.renderItems();
 profileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
