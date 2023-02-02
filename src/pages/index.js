@@ -31,17 +31,13 @@ const handleImgCard = (name, link) => {
   popupImg.open(name, link);
 };
 
-const handleSubmitProfile = (evt) => {
-  evt.preventDefault();
-  const newUser = popupProfile.close();
+const handleSubmitProfile = (newUser) => {
   user.setUserInfo(newUser);
   profileFormValidator.resetSubmit();
 };
 
-const handleSubmitCard = (evt) => {
-  evt.preventDefault();
-  const place = popupAddCard.close();
-  const card = new Card(cardConfig, place, handleImgCard);
+const handleSubmitCard = (newPlace) => {
+  const card = new Card(cardConfig, newPlace, handleImgCard);
   const cardElement = card.generateCard();
   placesList.addItem(cardElement);
   addCardFormValidator.resetSubmit();
