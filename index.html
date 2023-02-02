@@ -35,10 +35,10 @@
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="form" name="profile" novalidate>
-        <input class="form__input" name="profile-name" type="text" minlength=2 maxlength=40 placeholder="ФИО" required>
-        <span class="form__input-error form__input-error_profile-name"></span>
-        <input class="form__input" name="profile-description" type="text" minlength=2 maxlength=200 placeholder="Специальность" required>
-        <span class="form__input-error form__input-error_profile-description"></span>
+        <input class="form__input" name="author" type="text" minlength=2 maxlength=40 placeholder="ФИО" required>
+        <span class="form__input-error form__input-error_author"></span>
+        <input class="form__input" name="description" type="text" minlength=2 maxlength=200 placeholder="Специальность" required>
+        <span class="form__input-error form__input-error_description"></span>
         <button class="button form__submit" type="submit">Сохранить</button>
       </form>
       <button class="button popup__btn-close" type="button"></button>
@@ -48,10 +48,10 @@
     <div class="popup__container">
       <h2 class="popup__title">Новое место</h2>
       <form class="form" name="addCard" novalidate>
-        <input class="form__input" name="place-name" type="text" minlength=2 maxlength=30 placeholder="Название" required>
-        <span class="form__input-error form__input-error_place-name"></span>
-        <input class="form__input" name="place-description" type="url" placeholder="Ссылка на картинку" required>
-        <span class="form__input-error form__input-error_place-description"></span>
+        <input class="form__input" name="name" type="text" minlength=2 maxlength=30 placeholder="Название" required>
+        <span class="form__input-error form__input-error_name"></span>
+        <input class="form__input" name="link" type="url" placeholder="Ссылка на картинку" required>
+        <span class="form__input-error form__input-error_link"></span>
         <button class="button form__submit" type="submit">Создать</button>
       </form>
       <button class="button popup__btn-close" type="button"></button>

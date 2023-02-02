@@ -67,10 +67,6 @@ export default class FormValidator {
     this.#inactiveButtonState();
   }
 
-  resetInputs() {
-    this.#formElement.reset();
-  }
-
   resetErrors() {
     this.#errorElements.forEach((elem) => elem.textContent = '');
     this.#inputElements.forEach((elem) => elem.classList.remove(this.#class.inputError));
