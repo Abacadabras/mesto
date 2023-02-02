@@ -31,25 +31,27 @@ const handleImgCard = (name, link) => {
   popupImg.open(name, link);
 };
 
+const addNewCard = (place) => {
+  const card = new Card(cardConfig, place, handleImgCard);
+  const cardElement = card.generateCard();
+  placesList.addItem(cardElement);
+}
+
 const handleSubmitProfile = (newUser) => {
   user.setUserInfo(newUser);
   profileFormValidator.resetSubmit();
 };
 
 const handleSubmitCard = (newPlace) => {
-  const card = new Card(cardConfig, newPlace, handleImgCard);
-  const cardElement = card.generateCard();
-  placesList.addItem(cardElement);
+  addNewCard(newPlace);
   addCardFormValidator.resetSubmit();
 };
 const placesList = new Section({
-  items: dataCards,
-  renderer: (place) => {
-    const card = new Card(cardConfig, place, handleImgCard);
-    const cardElement = card.generateCard();
-    placesList.addItem(cardElement);
-  }
-}, placesSelector);
+    items: dataCards,
+    renderer: addNewCard,
+  },
+  placesSelector
+);
 
 const popupProfile = new PopupWithForm(popupProfileSelector, handleSubmitProfile);
 const popupAddCard = new PopupWithForm(popupAddCardSelector, handleSubmitCard);
