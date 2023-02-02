@@ -28,6 +28,7 @@ export default class Card {
   }
   #handleDeleteCardBtn() {
     this.#newCardElement.remove();
+    this.#newCardElement = null;
   }
 
   #setEventListeners() {
