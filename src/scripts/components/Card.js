@@ -1,15 +1,17 @@
 export default class Card {
   #class
-  #card
+  #cardName
+  #cardLink
   #newCardElement
   #imgCardElement
   #btnLikeCard
   #btnDeleteCard
   #handleImgCard
 
-  constructor(cardConfig, dataCard, openPopup) {
+  constructor(cardConfig, { name, link }, openPopup) {
     this.#class = cardConfig;
-    this.#card = dataCard;
+    this.#cardName = name;
+    this.#cardLink = link;
     this.#handleImgCard = openPopup;
   }
 
@@ -29,15 +31,9 @@ export default class Card {
   }
 
   #setEventListeners() {
-    this.#btnLikeCard.addEventListener('click', () => {
-      this.#handleLikeCardBtn();
-    });
-    this.#btnDeleteCard.addEventListener('click', () => {
-      this.#handleDeleteCardBtn();
-    });
-    this.#imgCardElement.addEventListener('click', () => {
-      this.#handleImgCard(this.#card.name, this.#card.link);
-    });
+    this.#btnLikeCard.addEventListener('click', this.#handleLikeCardBtn.bind(this));
+    this.#btnDeleteCard.addEventListener('click', this.#handleDeleteCardBtn.bind(this));
+    this.#imgCardElement.addEventListener('click', this.#handleImgCard.bind(this, this.#cardName, this.#cardLink));
   }
 
   generateCard() {
@@ -47,9 +43,9 @@ export default class Card {
     this.#btnLikeCard = this.#newCardElement.querySelector(this.#class.btnLikeCardClass);
     this.#btnDeleteCard = this.#newCardElement.querySelector(this.#class.btnDeleteCardClass);
 
-    this.#newCardElement.querySelector(this.#class.titleCardClass).textContent = this.#card.name;
-    this.#imgCardElement.alt = this.#card.name;
-    this.#imgCardElement.src = this.#card.link;
+    this.#newCardElement.querySelector(this.#class.titleCardClass).textContent = this.#cardName;
+    this.#imgCardElement.alt = this.#cardName;
+    this.#imgCardElement.src = this.#cardLink;
 
     this.#setEventListeners();
 
