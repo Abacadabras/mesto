@@ -1,3 +1,4 @@
+import './index.css';
 import { dataCards, validationConfig, cardConfig } from '../scripts/utils/constants.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js'
