@@ -16,8 +16,15 @@ export default class PopupWithForm extends Popup {
     return this.#inputs.reduce((acc, input) => ({ ...acc, [input.name]: input.value }), {});
   }
 
+  #submit(evt) {
+    evt.preventDefault();
+    const valueInputs = this.#getInputValues();
+    this.#handleSubmit(valueInputs);
+    this.close();
+  }
+
   setEventListeners() {
-    this.popupElement.addEventListener('submit', this.#handleSubmit.bind(this));
+    this.popupElement.addEventListener('submit', this.#submit.bind(this));
     super.setEventListeners();
   }
 
@@ -27,8 +34,6 @@ export default class PopupWithForm extends Popup {
 
   close() {
     super.close();
-    const res = this.#getInputValues();
     this.#formElement.reset();
-    return res;
   }
 }

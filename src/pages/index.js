@@ -31,29 +31,27 @@ const handleImgCard = (name, link) => {
   popupImg.open(name, link);
 };
 
-const handleSubmitProfile = (evt) => {
-  evt.preventDefault();
-  const newUser = popupProfile.close();
+const addNewCard = (place) => {
+  const card = new Card(cardConfig, place, handleImgCard);
+  const cardElement = card.generateCard();
+  placesList.addItem(cardElement);
+}
+
+const handleSubmitProfile = (newUser) => {
   user.setUserInfo(newUser);
   profileFormValidator.resetSubmit();
 };
 
-const handleSubmitCard = (evt) => {
-  evt.preventDefault();
-  const place = popupAddCard.close();
-  const card = new Card(cardConfig, place, handleImgCard);
-  const cardElement = card.generateCard();
-  placesList.addItem(cardElement);
+const handleSubmitCard = (newPlace) => {
+  addNewCard(newPlace);
   addCardFormValidator.resetSubmit();
 };
 const placesList = new Section({
-  items: dataCards,
-  renderer: (place) => {
-    const card = new Card(cardConfig, place, handleImgCard);
-    const cardElement = card.generateCard();
-    placesList.addItem(cardElement);
-  }
-}, placesSelector);
+    items: dataCards,
+    renderer: addNewCard,
+  },
+  placesSelector
+);
 
 const popupProfile = new PopupWithForm(popupProfileSelector, handleSubmitProfile);
 const popupAddCard = new PopupWithForm(popupAddCardSelector, handleSubmitCard);
