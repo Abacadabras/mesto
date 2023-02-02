@@ -3,6 +3,7 @@ const KEY_ESC = 'Escape';
 export default class Popup {
   constructor(popupSelector) {
     this.popupElement = document.querySelector(popupSelector);
+    this.#handleEscClose.bind(this);
   }
 
   #handleEscClose(evt) {
@@ -16,12 +17,12 @@ export default class Popup {
   };
 
   open() {
-    document.addEventListener('keydown', this.#handleEscClose.bind(this));
+    document.addEventListener('keydown', this.#handleEscClose);
     this.popupElement.classList.add('popup_active');
   }
 
   close() {
-    document.removeEventListener('keydown', this.#handleEscClose.bind(this));
+    document.removeEventListener('keydown', this.#handleEscClose);
     this.popupElement.classList.remove('popup_active');
   }
 
