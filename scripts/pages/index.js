@@ -4,13 +4,13 @@ import FormValidator from '../components/FormValidator.js'
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 
 
 //Popups profile
 const popupProfileSelector = '.popup.popup_type_profile';
-const profileElem = document.querySelector('.profile__info');
-const profileName = profileElem.querySelector('.profile__title');
-const profileJob = profileElem.querySelector('.profile__subtitle');
+const userNameSelector = '.profile__title';
+const userDescriptionSelector = '.profile__subtitle';
 const buttonEditProfile = document.querySelector('.button.profile__btn-edit');
 //Cards places
 const popupAddCardSelector = '.popup.popup_type_card';
@@ -34,12 +34,14 @@ const placesList = new Section({
   }
 }, placesSelector);
 
+const user = new UserInfo(userNameSelector, userDescriptionSelector);
+
 const handleImgCard = (name, link) => {
   popupImg.open(name, link);
 };
 
 buttonEditProfile.addEventListener('mousedown', () => {
-  popupProfile.setInputValues({ author:  profileName.textContent, description:  profileJob.textContent });
+  popupProfile.setInputValues(user.getUserInfo());
   profileFormValidator.resetErrors();
   popupProfile.open();
 });
@@ -50,9 +52,8 @@ buttonAddPlace.addEventListener('mousedown', () => {
 
 const handleSubmitProfile = (evt) => {
   evt.preventDefault();
-  const { author, description } = popupProfile.close();
-  profileName.textContent = author;
-  profileJob.textContent = description;
+  const newUser = popupProfile.close();
+  user.setUserInfo(newUser);
   profileFormValidator.resetSubmit();
 };
 
@@ -74,3 +75,5 @@ popupProfile.setEventListeners();
 popupAddCard.setEventListeners();
 profileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
+
+
