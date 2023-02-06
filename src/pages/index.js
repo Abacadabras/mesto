@@ -1,5 +1,5 @@
 import './index.css';
-import { dataCards, validationConfig, cardConfig, apiConfig, userConfig } from '../scripts/utils/constants.js';
+import { validationConfig, cardConfig, apiConfig, userConfig } from '../scripts/utils/constants.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js'
 import Section from '../scripts/components/Section.js';
@@ -46,13 +46,8 @@ const handleSubmitCard = (newPlace) => {
   addNewCard(newPlace);
   addCardFormValidator.resetSubmit();
 };
-const placesList = new Section({
-    items: dataCards,
-    renderer: addNewCard,
-  },
-  placesSelector
-);
 
+const placesList = new Section(addNewCard, placesSelector);
 const popupProfile = new PopupWithForm(popupProfileSelector, handleSubmitProfile);
 const popupAddCard = new PopupWithForm(popupAddCardSelector, handleSubmitCard);
 
@@ -66,7 +61,6 @@ buttonAddPlace.addEventListener('mousedown', () => {
   popupAddCard.open();
 })
 
-placesList.renderItems();
 popupImg.setEventListeners();
 popupProfile.setEventListeners();
 popupAddCard.setEventListeners();
@@ -74,3 +68,4 @@ profileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
 api.getUser().then((dataUser) => user.setUserInfo(dataUser)).catch((err) => console.error(err));
+api.getDataCards().then((dataCards) => placesList.renderItems(dataCards)).catch((err) => console.error(err));
