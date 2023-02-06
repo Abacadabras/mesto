@@ -1,11 +1,12 @@
 import './index.css';
-import { dataCards, validationConfig, cardConfig } from '../scripts/utils/constants.js';
+import { dataCards, validationConfig, cardConfig, apiConfig } from '../scripts/utils/constants.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js'
 import Section from '../scripts/components/Section.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import UserInfo from '../scripts/components/UserInfo.js';
+import Api from '../scripts/components/Api.js';
 
 
 //Popups profile
@@ -26,6 +27,7 @@ const addCardFormValidator = new FormValidator(validationConfig, formAddCard);
 
 const popupImg = new PopupWithImage(popupImgSelector);
 const user = new UserInfo(userNameSelector, userAboutSelector);
+const api = new Api(apiConfig);
 
 const handleImgCard = (name, link) => {
   popupImg.open(name, link);
@@ -72,3 +74,5 @@ popupProfile.setEventListeners();
 popupAddCard.setEventListeners();
 profileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
+
+api.getUser().then((dataUser) => user.setUserInfo(dataUser));

@@ -6,7 +6,7 @@ export default class Api {
     this.#headers = headers;
   }
 
-  getMyUser() {
+  getUser() {
     return fetch(`${this.#url}/users/me`, {
       headers: this.#headers,
     })

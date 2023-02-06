@@ -44,8 +44,17 @@ const cardConfig = {
   btnLikeCardActive: 'place__btn-like_active',
 };
 
+const apiConfig = {
+  url: 'https://nomoreparties.co/v1/cohort-58/',
+  headers: {
+    authorization: '304f2533-a0f4-4995-ab0c-ee526874092a',
+    'Content-Type': 'application/json',
+  },
+}
+
 export {
   dataCards,
   validationConfig,
   cardConfig,
+  apiConfig,
 }
