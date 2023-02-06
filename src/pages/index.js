@@ -11,7 +11,7 @@ import UserInfo from '../scripts/components/UserInfo.js';
 //Popups profile
 const popupProfileSelector = '.popup.popup_type_profile';
 const userNameSelector = '.profile__title';
-const userDescriptionSelector = '.profile__subtitle';
+const userAboutSelector = '.profile__subtitle';
 const buttonEditProfile = document.querySelector('.button.profile__btn-edit');
 //Cards places
 const popupAddCardSelector = '.popup.popup_type_card';
@@ -25,7 +25,7 @@ const profileFormValidator = new FormValidator(validationConfig, formProfile);
 const addCardFormValidator = new FormValidator(validationConfig, formAddCard);
 
 const popupImg = new PopupWithImage(popupImgSelector);
-const user = new UserInfo(userNameSelector, userDescriptionSelector);
+const user = new UserInfo(userNameSelector, userAboutSelector);
 
 const handleImgCard = (name, link) => {
   popupImg.open(name, link);
