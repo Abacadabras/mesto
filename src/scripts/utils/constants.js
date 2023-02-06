@@ -52,9 +52,16 @@ const apiConfig = {
   },
 }
 
+const userConfig = {
+  nameClass: '.profile__title',
+  aboutClass: '.profile__subtitle',
+  imgClass: '.profile__avatar',
+}
+
 export {
   dataCards,
   validationConfig,
   cardConfig,
   apiConfig,
+  userConfig,
 }
