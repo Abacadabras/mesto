@@ -63,18 +63,24 @@ const addNewCard = (place) => {
 }
 
 const handleSubmitProfile = (newUser) => {
-  api.setUser(newUser).then(({ name, about }) => user.setUserInfo({ name, about })).catch((err) => console.error(err));
-  profileFormValidator.resetSubmit();
+  return api.setUser(newUser).then(({ name, about }) => {
+    user.setUserInfo({ name, about });
+    profileFormValidator.resetSubmit();
+  });
 };
 
 const handleSubmitCard = (newPlace) => {
-  api.setDataCards(newPlace).then((dataPlace) => addNewCard(dataPlace)).catch((err) => console.error(err));
-  addCardFormValidator.resetSubmit();
+  return api.setDataCards(newPlace).then((dataPlace) => {
+    addNewCard(dataPlace);
+    addCardFormValidator.resetSubmit();
+  });
 };
 
 const handleSubmitAvatar = (newAvatar) => {
-  api.setAvatar(newAvatar).then(({ avatar }) => user.setUserInfo({ avatar })).catch((err) => console.error(err));
-  addAvatarFormValidator.resetSubmit();
+  return api.setAvatar(newAvatar).then(({ avatar }) => {
+    user.setUserInfo({ avatar });
+    addAvatarFormValidator.resetSubmit();
+  });
 };
 
 const placesList = new Section(addNewCard, placesSelector);
