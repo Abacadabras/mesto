@@ -47,4 +47,19 @@ export default class Api {
       });
   }
 
+  setDataCards(place) {
+    return fetch(`${this.#url}/cards`, {
+      method: 'POST',
+      headers: this.#headers,
+      body: JSON.stringify(place),
+    })
+      .then((response) => {
+        if (response.ok) return response.json();
+        return Promise.reject(new Error(`Error: ${response.status}`));
+      })
+      .catch((err) => {
+        console.error(err)
+      });
+  }
+
 }

@@ -43,7 +43,7 @@ const handleSubmitProfile = (newUser) => {
 };
 
 const handleSubmitCard = (newPlace) => {
-  addNewCard(newPlace);
+  api.setDataCards(newPlace).then((dataPlace) => addNewCard(dataPlace)).catch((err) => console.error(err));
   addCardFormValidator.resetSubmit();
 };
 
