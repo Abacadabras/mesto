@@ -15,6 +15,7 @@ const cardConfig = {
   btnLikeCardClass: '.button.place__btn-like',
   btnDeleteCardClass: '.button.place__btn-delete',
   btnLikeCardActive: 'place__btn-like_active',
+  countLikesClass: '.place__likes-counter',
 };
 
 const apiConfig = {
