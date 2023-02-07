@@ -10,15 +10,13 @@ import Api from '../scripts/components/Api.js';
 import PopupWithConfirmation from '../scripts/components/PopupWithConfirmation.js';
 
 
-//Popups profile
-const popupProfileSelector = '.popup.popup_type_profile';
+const buttonAddPlace = document.querySelector('.button.profile__btn-add');
 const buttonEditProfile = document.querySelector('.button.profile__btn-edit');
-//Cards places
+const popupProfileSelector = '.popup.popup_type_profile';
 const popupAddCardSelector = '.popup.popup_type_card';
 const popupImgSelector = '.popup.popup_type_image';
 const popupConfirmationSelector = '.popup_type_confirmation';
 const placesSelector = '.places';
-const buttonAddPlace = document.querySelector('.button.profile__btn-add');
 
 const formProfile = document.forms.profile;
 const formAddCard = document.forms.addCard;
