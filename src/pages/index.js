@@ -42,9 +42,18 @@ const handleSubmitConfirmation = (card) => {
 
 const popupConfirmation = new PopupWithConfirmation(popupConfirmationSelector, handleSubmitConfirmation);
 
+const handleLikeCard = (isLike, card) => {
+  const cardId = card.getId();
+  if (isLike) {
+    api.likeCard(cardId).then(({ likes }) => card.setCountLike(likes.length)).catch((err) => console.error(err));
+  } else {
+    api.dislikeCard(cardId).then(({ likes }) => card.setCountLike(likes.length)).catch((err) => console.error(err));
+  }
+};
+
 const addNewCard = (place) => {
   const placeWithOwner = { ...place, userId: user.getUserId() };
-  const card = new Card(cardConfig, placeWithOwner, handleImgCard, handlePopupConfirmation);
+  const card = new Card(cardConfig, placeWithOwner, handleImgCard, handlePopupConfirmation, handleLikeCard);
   const cardElement = card.generateCard();
   placesList.addItem(cardElement);
 }

@@ -13,17 +13,21 @@ export default class Card {
   #userId
   #ownerId
   #cardId
+  #handleLikeCard
+  #likes
 
-  constructor(cardConfig, { _id, name, link, likes, userId, owner }, openPopup, openConfirmation) {
+  constructor(cardConfig, { _id, name, link, likes, userId, owner }, openPopup, openConfirmation, handleLikeCard) {
     this.#class = cardConfig;
     this.#cardName = name;
     this.#cardLink = link;
     this.#handleImgCard = openPopup;
-    this.#countLikes = likes.length;
+    this.#likes = likes;
+    this.#countLikes = this.#likes.length;
     this.#handleConfirmation = openConfirmation;
     this.#userId = userId;
     this.#ownerId = owner._id;
     this.#cardId = _id;
+    this.#handleLikeCard = handleLikeCard;
   }
 
   #getTemplate() {
@@ -35,12 +39,8 @@ export default class Card {
   }
 
   #handleLikeCardBtn() {
-    if (this.#btnLikeCard.classList.toggle(this.#class.btnLikeCardActive)) {
-      this.#countLikes += 1;
-    } else {
-      this.#countLikes -= 1;
-    }
-    this.#countLikesElem.textContent = this.#countLikes;
+    const isLike = this.#btnLikeCard.classList.toggle(this.#class.btnLikeCardActive);
+    this.#handleLikeCard(isLike, this);
   }
 
   #setEventListeners() {
@@ -55,6 +55,12 @@ export default class Card {
     if (this.#userId !== this.#ownerId) {
       this.#btnDeleteCard.remove();
       this.#btnDeleteCard = null;
+    }
+  }
+
+  #isUserLike() {
+    if (this.#likes.filter((like) => like._id === this.#userId).length) {
+      this.#btnLikeCard.classList.toggle(this.#class.btnLikeCardActive);
     }
   }
 
@@ -78,11 +84,16 @@ export default class Card {
 
     this.#isOwner();
     this.#setEventListeners();
+    this.#isUserLike();
 
     return this.#newCardElement;
   }
 
   getId() {
     return this.#cardId;
+  }
+
+  setCountLike(countLikes) {
+    this.#countLikesElem.textContent = this.#countLikes = countLikes;
   }
 }
