@@ -9,13 +9,15 @@ export default class Card {
   #handleImgCard
   #countLikes
   #countLikesElem
+  #handleConfirmation
 
-  constructor(cardConfig, { name, link, likes }, openPopup) {
+  constructor(cardConfig, { name, link, likes }, openPopup, openConfirmation) {
     this.#class = cardConfig;
     this.#cardName = name;
     this.#cardLink = link;
     this.#handleImgCard = openPopup;
     this.#countLikes = likes.length;
+    this.#handleConfirmation = openConfirmation;
   }
 
   #getTemplate() {
@@ -34,14 +36,14 @@ export default class Card {
     }
     this.#countLikesElem.textContent = this.#countLikes;
   }
-  #handleDeleteCardBtn() {
+  delete() {
     this.#newCardElement.remove();
     this.#newCardElement = null;
   }
 
   #setEventListeners() {
     this.#btnLikeCard.addEventListener('click', this.#handleLikeCardBtn.bind(this));
-    this.#btnDeleteCard.addEventListener('click', this.#handleDeleteCardBtn.bind(this));
+    this.#btnDeleteCard.addEventListener('click', this.#handleConfirmation.bind(this, this));
     this.#imgCardElement.addEventListener('click', this.#handleImgCard.bind(this, this.#cardName, this.#cardLink));
   }
 

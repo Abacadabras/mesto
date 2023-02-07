@@ -7,6 +7,7 @@ import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import Api from '../scripts/components/Api.js';
+import PopupWithConfirmation from '../scripts/components/PopupWithConfirmation.js';
 
 
 //Popups profile
@@ -15,6 +16,7 @@ const buttonEditProfile = document.querySelector('.button.profile__btn-edit');
 //Cards places
 const popupAddCardSelector = '.popup.popup_type_card';
 const popupImgSelector = '.popup.popup_type_image';
+const popupConfirmationSelector = '.popup_type_confirmation';
 const placesSelector = '.places';
 const buttonAddPlace = document.querySelector('.button.profile__btn-add');
 
@@ -31,8 +33,18 @@ const handleImgCard = (name, link) => {
   popupImg.open(name, link);
 };
 
+const handlePopupConfirmation = (card) => {
+  popupConfirmation.open(card);
+}
+
+const handleSubmitConfirmation = (card) => {
+  card.delete();
+};
+
+const popupConfirmation = new PopupWithConfirmation(popupConfirmationSelector, handleSubmitConfirmation);
+
 const addNewCard = (place) => {
-  const card = new Card(cardConfig, place, handleImgCard);
+  const card = new Card(cardConfig, place, handleImgCard, handlePopupConfirmation);
   const cardElement = card.generateCard();
   placesList.addItem(cardElement);
 }
@@ -64,6 +76,7 @@ buttonAddPlace.addEventListener('mousedown', () => {
 popupImg.setEventListeners();
 popupProfile.setEventListeners();
 popupAddCard.setEventListeners();
+popupConfirmation.setEventListeners();
 profileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
