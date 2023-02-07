@@ -103,4 +103,19 @@ export default class Api {
         console.error(err)
       });
   }
+
+  setAvatar(avatar) {
+    return fetch(`${this.#url}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this.#headers,
+      body: JSON.stringify(avatar),
+    })
+      .then((response) => {
+        if (response.ok) return response.json();
+        return Promise.reject(new Error(`Error: ${response.status}`));
+      })
+      .catch((err) => {
+        console.error(err)
+      });
+  }
 }

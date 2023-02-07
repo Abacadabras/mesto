@@ -24,7 +24,7 @@ export default class UserInfo {
                 about = this.#about.textContent,
                 avatar = this.#avatar.src,
                 _id = this.#userId }) {
-    this.#name.textContent = this.#avatar.alt =  name;
+    this.#name.textContent = this.#avatar.alt = name;
     this.#about.textContent = about;
     this.#avatar.src = avatar;
     this.#userId = _id;

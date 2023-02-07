@@ -12,16 +12,20 @@ import PopupWithConfirmation from '../scripts/components/PopupWithConfirmation.j
 
 const buttonAddPlace = document.querySelector('.button.profile__btn-add');
 const buttonEditProfile = document.querySelector('.button.profile__btn-edit');
+const buttonEditAvatar = document.querySelector('.profile__avatar-wrapper');
 const popupProfileSelector = '.popup.popup_type_profile';
 const popupAddCardSelector = '.popup.popup_type_card';
 const popupImgSelector = '.popup.popup_type_image';
 const popupConfirmationSelector = '.popup_type_confirmation';
+const popupAvatarSelector = '.popup_type_avatar';
 const placesSelector = '.places';
 
 const formProfile = document.forms.profile;
 const formAddCard = document.forms.addCard;
+const formAddAvatar = document.forms.addAvatar;
 const profileFormValidator = new FormValidator(validationConfig, formProfile);
 const addCardFormValidator = new FormValidator(validationConfig, formAddCard);
+const addAvatarFormValidator = new FormValidator(validationConfig, formAddAvatar);
 
 const popupImg = new PopupWithImage(popupImgSelector);
 const user = new UserInfo(userConfig);
@@ -59,7 +63,7 @@ const addNewCard = (place) => {
 }
 
 const handleSubmitProfile = (newUser) => {
-  api.setUser(newUser).then((dataUser) => user.setUserInfo(dataUser)).catch((err) => console.error(err));
+  api.setUser(newUser).then(({ name, about }) => user.setUserInfo({ name, about })).catch((err) => console.error(err));
   profileFormValidator.resetSubmit();
 };
 
@@ -68,9 +72,15 @@ const handleSubmitCard = (newPlace) => {
   addCardFormValidator.resetSubmit();
 };
 
+const handleSubmitAvatar = (newAvatar) => {
+  api.setAvatar(newAvatar).then(({ avatar }) => user.setUserInfo({ avatar })).catch((err) => console.error(err));
+  addAvatarFormValidator.resetSubmit();
+};
+
 const placesList = new Section(addNewCard, placesSelector);
 const popupProfile = new PopupWithForm(popupProfileSelector, handleSubmitProfile);
 const popupAddCard = new PopupWithForm(popupAddCardSelector, handleSubmitCard);
+const popupAvatar = new PopupWithForm(popupAvatarSelector, handleSubmitAvatar);
 
 buttonEditProfile.addEventListener('mousedown', () => {
   popupProfile.setInputValues(user.getUserInfo());
@@ -82,12 +92,18 @@ buttonAddPlace.addEventListener('mousedown', () => {
   popupAddCard.open();
 })
 
+buttonEditAvatar.addEventListener('mousedown', () => {
+  popupAvatar.open();
+})
+
 popupImg.setEventListeners();
 popupProfile.setEventListeners();
 popupAddCard.setEventListeners();
 popupConfirmation.setEventListeners();
+popupAvatar.setEventListeners();
 profileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
+addAvatarFormValidator.enableValidation();
 
 Promise.all([api.getUser(), api.getDataCards()])
   .then(([ dataUser, dataCards ]) => {
