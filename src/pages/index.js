@@ -81,5 +81,9 @@ popupConfirmation.setEventListeners();
 profileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
-api.getUser().then((dataUser) => user.setUserInfo(dataUser)).catch((err) => console.error(err));
-api.getDataCards().then((dataCards) => placesList.renderItems(dataCards)).catch((err) => console.error(err));
+Promise.all([api.getUser(), api.getDataCards()])
+  .then(([ dataUser, dataCards ]) => {
+    user.setUserInfo(dataUser);
+    placesList.renderItems(dataCards);
+  })
+  .catch((err) => console.error(err));
