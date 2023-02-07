@@ -5,11 +5,15 @@ export default class PopupWithForm extends Popup {
   #handleSubmit
   #formElement
   #inputs
+  #submitBtn
+  #submitBtnText
   constructor(popupSelector, submitForm) {
     super(popupSelector);
     this.#handleSubmit = submitForm;
     this.#formElement = this.popupElement.querySelector('form');
     this.#inputs = Array.from(this.#formElement.querySelectorAll('input'));
+    this.#submitBtn = this.#formElement.querySelector('.button.form__submit');
+    this.#submitBtnText = this.#submitBtn.textContent;
   }
 
   #getInputValues() {
@@ -18,9 +22,24 @@ export default class PopupWithForm extends Popup {
 
   #submit(evt) {
     evt.preventDefault();
+    this.#submitBtn.textContent = 'Сохранение...';
+    this.#submitBtn.disabled = true;
     const valueInputs = this.#getInputValues();
-    this.#handleSubmit(valueInputs);
-    this.close();
+    this.#handleSubmit(valueInputs)
+      .then(() => {
+        this.#submitBtn.textContent = 'Сохранено';
+      })
+      .catch((error) => {
+        console.error(error);
+        this.#submitBtn.textContent = 'Ошибка сервера!!!';
+      })
+      .finally(() => {
+        setTimeout(() => {
+          this.#submitBtn.textContent = this.#submitBtnText;
+          this.#submitBtn.disabled = false;
+          this.close();
+        }, 1500);
+      });
   }
 
   setEventListeners() {
