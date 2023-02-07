@@ -31,4 +31,20 @@ export default class Api {
         console.error(err)
       });
   }
+
+  setUser(user) {
+    return fetch(`${this.#url}/users/me`, {
+      method: 'PATCH',
+      headers: this.#headers,
+      body: JSON.stringify(user),
+    })
+      .then((response) => {
+        if (response.ok) return response.json();
+        return Promise.reject(new Error(`Error: ${response.status}`));
+      })
+      .catch((err) => {
+        console.error(err)
+      });
+  }
+
 }
