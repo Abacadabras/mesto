@@ -10,14 +10,18 @@ export default class Card {
   #countLikes
   #countLikesElem
   #handleConfirmation
+  #userId
+  #ownerId
 
-  constructor(cardConfig, { name, link, likes }, openPopup, openConfirmation) {
+  constructor(cardConfig, { name, link, likes, userId, owner }, openPopup, openConfirmation) {
     this.#class = cardConfig;
     this.#cardName = name;
     this.#cardLink = link;
     this.#handleImgCard = openPopup;
     this.#countLikes = likes.length;
     this.#handleConfirmation = openConfirmation;
+    this.#userId = userId;
+    this.#ownerId = owner._id;
   }
 
   #getTemplate() {
@@ -43,8 +47,17 @@ export default class Card {
 
   #setEventListeners() {
     this.#btnLikeCard.addEventListener('click', this.#handleLikeCardBtn.bind(this));
-    this.#btnDeleteCard.addEventListener('click', this.#handleConfirmation.bind(this, this));
+    if (this.#btnDeleteCard !== null) {
+      this.#btnDeleteCard.addEventListener('click', this.#handleConfirmation.bind(this, this));
+    }
     this.#imgCardElement.addEventListener('click', this.#handleImgCard.bind(this, this.#cardName, this.#cardLink));
+  }
+
+  #isOwner() {
+    if (this.#userId !== this.#ownerId) {
+      this.#btnDeleteCard.remove();
+      this.#btnDeleteCard = null;
+    }
   }
 
   generateCard() {
@@ -60,6 +73,7 @@ export default class Card {
     this.#imgCardElement.src = this.#cardLink;
     this.#countLikesElem.textContent = this.#countLikes;
 
+    this.#isOwner();
     this.#setEventListeners();
 
     return this.#newCardElement;

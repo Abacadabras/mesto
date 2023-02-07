@@ -44,7 +44,8 @@ const handleSubmitConfirmation = (card) => {
 const popupConfirmation = new PopupWithConfirmation(popupConfirmationSelector, handleSubmitConfirmation);
 
 const addNewCard = (place) => {
-  const card = new Card(cardConfig, place, handleImgCard, handlePopupConfirmation);
+  const placeWithOwner = { ...place, userId: user.getUserId() };
+  const card = new Card(cardConfig, placeWithOwner, handleImgCard, handlePopupConfirmation);
   const cardElement = card.generateCard();
   placesList.addItem(cardElement);
 }
