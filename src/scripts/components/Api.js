@@ -62,4 +62,17 @@ export default class Api {
       });
   }
 
+  deleteCard(id) {
+    return fetch(`${this.#url}/cards/${id}`, {
+      method: "DELETE",
+      headers: this.#headers,
+    })
+      .then((response) => {
+        if (response.ok) return response.json();
+        return Promise.reject(new Error(`Error: ${response.status}`));
+      })
+      .catch((err) => {
+        console.error(err)
+      });
+  }
 }

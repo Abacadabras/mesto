@@ -12,8 +12,9 @@ export default class Card {
   #handleConfirmation
   #userId
   #ownerId
+  #cardId
 
-  constructor(cardConfig, { name, link, likes, userId, owner }, openPopup, openConfirmation) {
+  constructor(cardConfig, { _id, name, link, likes, userId, owner }, openPopup, openConfirmation) {
     this.#class = cardConfig;
     this.#cardName = name;
     this.#cardLink = link;
@@ -22,6 +23,7 @@ export default class Card {
     this.#handleConfirmation = openConfirmation;
     this.#userId = userId;
     this.#ownerId = owner._id;
+    this.#cardId = _id;
   }
 
   #getTemplate() {
@@ -40,10 +42,6 @@ export default class Card {
     }
     this.#countLikesElem.textContent = this.#countLikes;
   }
-  delete() {
-    this.#newCardElement.remove();
-    this.#newCardElement = null;
-  }
 
   #setEventListeners() {
     this.#btnLikeCard.addEventListener('click', this.#handleLikeCardBtn.bind(this));
@@ -58,6 +56,11 @@ export default class Card {
       this.#btnDeleteCard.remove();
       this.#btnDeleteCard = null;
     }
+  }
+
+  delete() {
+    this.#newCardElement.remove();
+    this.#newCardElement = null;
   }
 
   generateCard() {
@@ -77,5 +80,9 @@ export default class Card {
     this.#setEventListeners();
 
     return this.#newCardElement;
+  }
+
+  getId() {
+    return this.#cardId;
   }
 }
