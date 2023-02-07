@@ -6,30 +6,28 @@ export default class Api {
     this.#headers = headers;
   }
 
+  #response(response) {
+    if (response.ok) return response.json();
+    return Promise.reject(new Error(`Error: ${response.status}`));
+  }
+
+  #error(error) {
+    console.error(error);
+  }
   getUser() {
     return fetch(`${this.#url}/users/me`, {
       headers: this.#headers,
     })
-      .then((response) => {
-        if (response.ok) return response.json();
-        return Promise.reject(new Error(`Error: ${response.status}`));
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+      .then(this.#response)
+      .catch(this.#error);
   }
 
   getDataCards() {
     return fetch(`${this.#url}/cards`, {
       headers: this.#headers,
     })
-      .then((response) => {
-        if (response.ok) return response.json();
-        return Promise.reject(new Error(`Error: ${response.status}`));
-      })
-      .catch((err) => {
-        console.error(err)
-      });
+      .then(this.#response)
+      .catch(this.#error);
   }
 
   setUser(user) {
@@ -38,13 +36,8 @@ export default class Api {
       headers: this.#headers,
       body: JSON.stringify(user),
     })
-      .then((response) => {
-        if (response.ok) return response.json();
-        return Promise.reject(new Error(`Error: ${response.status}`));
-      })
-      .catch((err) => {
-        console.error(err)
-      });
+      .then(this.#response)
+      .catch(this.#error);
   }
 
   setDataCards(place) {
@@ -53,13 +46,8 @@ export default class Api {
       headers: this.#headers,
       body: JSON.stringify(place),
     })
-      .then((response) => {
-        if (response.ok) return response.json();
-        return Promise.reject(new Error(`Error: ${response.status}`));
-      })
-      .catch((err) => {
-        console.error(err)
-      });
+      .then(this.#response)
+      .catch(this.#error);
   }
 
   deleteCard(id) {
@@ -67,13 +55,8 @@ export default class Api {
       method: 'DELETE',
       headers: this.#headers,
     })
-      .then((response) => {
-        if (response.ok) return response.json();
-        return Promise.reject(new Error(`Error: ${response.status}`));
-      })
-      .catch((err) => {
-        console.error(err)
-      });
+      .then(this.#response)
+      .catch(this.#error);
   }
 
   likeCard(id) {
@@ -81,13 +64,8 @@ export default class Api {
       method: 'PUT',
       headers: this.#headers,
     })
-      .then((response) => {
-        if (response.ok) return response.json();
-        return Promise.reject(new Error(`Error: ${response.status}`));
-      })
-      .catch((err) => {
-        console.error(err)
-      });
+      .then(this.#response)
+      .catch(this.#error);
   }
 
   dislikeCard(id) {
@@ -95,13 +73,8 @@ export default class Api {
       method: 'DELETE',
       headers: this.#headers,
     })
-      .then((response) => {
-        if (response.ok) return response.json();
-        return Promise.reject(new Error(`Error: ${response.status}`));
-      })
-      .catch((err) => {
-        console.error(err)
-      });
+      .then(this.#response)
+      .catch(this.#error);
   }
 
   setAvatar(avatar) {
@@ -110,12 +83,7 @@ export default class Api {
       headers: this.#headers,
       body: JSON.stringify(avatar),
     })
-      .then((response) => {
-        if (response.ok) return response.json();
-        return Promise.reject(new Error(`Error: ${response.status}`));
-      })
-      .catch((err) => {
-        console.error(err)
-      });
+      .then(this.#response)
+      .catch(this.#error);
   }
 }
