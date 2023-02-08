@@ -35,7 +35,8 @@ const handleSubmitConfirmation = (card) => {
   api.deleteCard(cardId).then(() => {
     popupConfirmation.close();
     card.delete();
-  }).catch((err) => console.error(err));
+  })
+    .catch((err) => console.error(err));
 };
 
 const popupConfirmation = new PopupWithConfirmation(popupConfig.popupConfirmationClass, handleSubmitConfirmation);
@@ -49,10 +50,15 @@ const handleLikeCard = (isLike, card) => {
   }
 };
 
+const createCard = (dataCard) => {
+  const card = new Card(cardConfig, dataCard, handleImgCard, handlePopupConfirmation, handleLikeCard);
+  return card.generateCard();
+}
+
 const addNewCard = (place) => {
-  const placeWithOwner = { ...place, userId: user.getUserId() };
-  const card = new Card(cardConfig, placeWithOwner, handleImgCard, handlePopupConfirmation, handleLikeCard);
-  const cardElement = card.generateCard();
+  const userId = user.getUserId();
+  const placeWithOwner = { ...place, userId };
+  const cardElement = createCard(placeWithOwner);
   placesList.addItem(cardElement);
 }
 
