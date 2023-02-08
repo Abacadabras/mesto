@@ -11,15 +11,11 @@ export default class Api {
     return Promise.reject(new Error(`Error: ${response.status}`));
   }
 
-  #error(error) {
-    console.error(error);
-  }
   getUser() {
     return fetch(`${this.#url}/users/me`, {
       headers: this.#headers,
     })
       .then(this.#response)
-      .catch(this.#error);
   }
 
   getDataCards() {
@@ -27,7 +23,6 @@ export default class Api {
       headers: this.#headers,
     })
       .then(this.#response)
-      .catch(this.#error);
   }
 
   setUser(user) {
@@ -37,7 +32,6 @@ export default class Api {
       body: JSON.stringify(user),
     })
       .then(this.#response)
-      .catch(this.#error);
   }
 
   setDataCards(place) {
@@ -47,7 +41,6 @@ export default class Api {
       body: JSON.stringify(place),
     })
       .then(this.#response)
-      .catch(this.#error);
   }
 
   deleteCard(id) {
@@ -56,7 +49,6 @@ export default class Api {
       headers: this.#headers,
     })
       .then(this.#response)
-      .catch(this.#error);
   }
 
   likeCard(id) {
@@ -65,7 +57,6 @@ export default class Api {
       headers: this.#headers,
     })
       .then(this.#response)
-      .catch(this.#error);
   }
 
   dislikeCard(id) {
@@ -74,7 +65,6 @@ export default class Api {
       headers: this.#headers,
     })
       .then(this.#response)
-      .catch(this.#error);
   }
 
   setAvatar(avatar) {
@@ -84,6 +74,5 @@ export default class Api {
       body: JSON.stringify(avatar),
     })
       .then(this.#response)
-      .catch(this.#error);
   }
 }
