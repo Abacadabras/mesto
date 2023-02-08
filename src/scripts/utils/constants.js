@@ -32,9 +32,21 @@ const userConfig = {
   imgClass: '.profile__avatar',
 }
 
+const popupConfig = {
+  popupProfileClass: '.popup.popup_type_profile',
+  popupAddCardClass: '.popup.popup_type_card',
+  popupImgClass: '.popup.popup_type_image',
+  popupConfirmationClass: '.popup_type_confirmation',
+  popupAvatarClass: '.popup_type_avatar',
+}
+
+const placesClass = '.places';
+
 export {
   validationConfig,
   cardConfig,
   apiConfig,
   userConfig,
+  popupConfig,
+  placesClass,
 }
