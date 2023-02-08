@@ -32,7 +32,10 @@ const handlePopupConfirmation = (card) => {
 
 const handleSubmitConfirmation = (card) => {
   const cardId = card.getId();
-  api.deleteCard(cardId).then(() => card.delete()).catch((err) => console.error(err));
+  api.deleteCard(cardId).then(() => {
+    popupConfirmation.close();
+    card.delete();
+  }).catch((err) => console.error(err));
 };
 
 const popupConfirmation = new PopupWithConfirmation(popupConfig.popupConfirmationClass, handleSubmitConfirmation);
