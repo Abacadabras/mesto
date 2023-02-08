@@ -28,6 +28,7 @@ export default class PopupWithForm extends Popup {
     this.#handleSubmit(valueInputs)
       .then(() => {
         this.#submitBtn.textContent = 'Сохранено';
+        setTimeout(() =>this.close(), 1000);
       })
       .catch((error) => {
         console.error(error);
@@ -37,7 +38,6 @@ export default class PopupWithForm extends Popup {
         setTimeout(() => {
           this.#submitBtn.textContent = this.#submitBtnText;
           this.#submitBtn.disabled = false;
-          this.close();
         }, 1500);
       });
   }
