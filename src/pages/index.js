@@ -1,5 +1,5 @@
 import './index.css';
-import { validationConfig, cardConfig, apiConfig, userConfig } from '../scripts/utils/constants.js';
+import { validationConfig, cardConfig, apiConfig, userConfig, popupConfig, placesClass } from '../scripts/utils/constants.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js'
 import Section from '../scripts/components/Section.js';
@@ -13,21 +13,12 @@ import PopupWithConfirmation from '../scripts/components/PopupWithConfirmation.j
 const buttonAddPlace = document.querySelector('.button.profile__btn-add');
 const buttonEditProfile = document.querySelector('.button.profile__btn-edit');
 const buttonEditAvatar = document.querySelector('.profile__avatar-wrapper');
-const popupProfileSelector = '.popup.popup_type_profile';
-const popupAddCardSelector = '.popup.popup_type_card';
-const popupImgSelector = '.popup.popup_type_image';
-const popupConfirmationSelector = '.popup_type_confirmation';
-const popupAvatarSelector = '.popup_type_avatar';
-const placesSelector = '.places';
 
-const formProfile = document.forms.profile;
-const formAddCard = document.forms.addCard;
-const formAddAvatar = document.forms.addAvatar;
-const profileFormValidator = new FormValidator(validationConfig, formProfile);
-const addCardFormValidator = new FormValidator(validationConfig, formAddCard);
-const addAvatarFormValidator = new FormValidator(validationConfig, formAddAvatar);
+const profileFormValidator = new FormValidator(validationConfig, document.forms.profile);
+const addCardFormValidator = new FormValidator(validationConfig, document.forms.addCard);
+const addAvatarFormValidator = new FormValidator(validationConfig, document.forms.addAvatar);
 
-const popupImg = new PopupWithImage(popupImgSelector);
+const popupImg = new PopupWithImage(popupConfig.popupImgClass);
 const user = new UserInfo(userConfig);
 const api = new Api(apiConfig);
 
@@ -44,7 +35,7 @@ const handleSubmitConfirmation = (card) => {
   api.deleteCard(cardId).then(() => card.delete()).catch((err) => console.error(err));
 };
 
-const popupConfirmation = new PopupWithConfirmation(popupConfirmationSelector, handleSubmitConfirmation);
+const popupConfirmation = new PopupWithConfirmation(popupConfig.popupConfirmationClass, handleSubmitConfirmation);
 
 const handleLikeCard = (isLike, card) => {
   const cardId = card.getId();
@@ -83,10 +74,10 @@ const handleSubmitAvatar = (newAvatar) => {
   });
 };
 
-const placesList = new Section(addNewCard, placesSelector);
-const popupProfile = new PopupWithForm(popupProfileSelector, handleSubmitProfile);
-const popupAddCard = new PopupWithForm(popupAddCardSelector, handleSubmitCard);
-const popupAvatar = new PopupWithForm(popupAvatarSelector, handleSubmitAvatar);
+const placesList = new Section(addNewCard, placesClass);
+const popupProfile = new PopupWithForm(popupConfig.popupProfileClass, handleSubmitProfile);
+const popupAddCard = new PopupWithForm(popupConfig.popupAddCardClass, handleSubmitCard);
+const popupAvatar = new PopupWithForm(popupConfig.popupAvatarClass, handleSubmitAvatar);
 
 buttonEditProfile.addEventListener('mousedown', () => {
   popupProfile.setInputValues(user.getUserInfo());
